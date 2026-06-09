@@ -10,7 +10,26 @@
             Desainer Website & Software Engineer di era modern. Membangun masa depan desain web yang responsif, estetis, dan sinematik.
         </p>
         <div class="cta-group fade-in-up delay-3">
-            <a href="#projects" class="btn-primary-bold">Eksplorasi Karya</a>
+            <a href="#about" class="btn-primary-bold">Eksplorasi Profil</a>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="about cinematic-about">
+    <div class="about-container glass-dark">
+        <h2 class="cinematic-section-title">BEHIND THE <span class="accent">CODE</span></h2>
+        <p class="large-text">
+            {% if profile.about_text %}
+                {{ profile.about_text|linebreaksbr }}
+            {% else %}
+                Saya menggabungkan teknik informatika dengan desain UX/UI yang tajam untuk menciptakan karya yang tidak hanya berfungsi secara sempurna, namun juga mampu membuat pengguna berdecak kagum.
+            {% endif %}
+        </p>
+        <div class="cta-group" style="justify-content: center;">
+            <a href="#contact" class="btn-outline-accent">Hubungi Saya</a>
+            {% if profile.cv_file %}
+                <a href="{{ profile.cv_file.url }}" target="_blank" class="btn-primary-bold" style="margin-left: 1rem;">Unduh CV</a>
+            {% endif %}
         </div>
     </div>
 </section>
@@ -47,25 +66,6 @@
                 </div>
             </div>
         {% endif %}
-    </div>
-</section>
-
-<section id="about" class="about cinematic-about">
-    <div class="about-container glass-dark">
-        <h2 class="cinematic-section-title">BEHIND THE <span class="accent">CODE</span></h2>
-        <p class="large-text">
-            {% if profile.about_text %}
-                {{ profile.about_text|linebreaksbr }}
-            {% else %}
-                Saya menggabungkan teknik informatika dengan desain UX/UI yang tajam untuk menciptakan karya yang tidak hanya berfungsi secara sempurna, namun juga mampu membuat pengguna berdecak kagum.
-            {% endif %}
-        </p>
-        <div class="cta-group" style="justify-content: center;">
-            <a href="#contact" class="btn-outline-accent">Hubungi Saya</a>
-            {% if profile.cv_file %}
-                <a href="{{ profile.cv_file.url }}" target="_blank" class="btn-primary-bold" style="margin-left: 1rem;">Unduh CV</a>
-            {% endif %}
-        </div>
     </div>
 </section>
 
