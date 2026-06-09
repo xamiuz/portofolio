@@ -4,28 +4,28 @@
 {% block content %}
 <section id="hero" class="hero cinematic-hero">
     <div class="hero-content">
-        <h2 class="subtitle cinematic-subtitle fade-in-up delay-1">Memperkenalkan</h2>
-        <h1 class="title cinematic-title slide-in">LEVI<br><span class="accent">WILSON</span></h1>
-        <p class="description cinematic-description fade-in-up delay-2">
+        <h2 class="subtitle cinematic-subtitle reveal delay-1">Memperkenalkan</h2>
+        <h1 class="title cinematic-title reveal delay-2">LEVI<br><span class="accent">WILSON</span></h1>
+        <p class="description cinematic-description reveal delay-3">
             Desainer Website & Software Engineer di era modern. Membangun masa depan desain web yang responsif, estetis, dan sinematik.
         </p>
-        <div class="cta-group fade-in-up delay-3">
+        <div class="cta-group reveal delay-4">
             <a href="#about" class="btn-primary-bold">Eksplorasi Profil</a>
         </div>
     </div>
 </section>
 
 <section id="about" class="about cinematic-about">
-    <div class="about-container glass-dark">
-        <h2 class="cinematic-section-title">BEHIND THE <span class="accent">CODE</span></h2>
-        <p class="large-text">
+    <div class="about-container glass-dark reveal">
+        <h2 class="cinematic-section-title reveal">BEHIND THE <span class="accent">CODE</span></h2>
+        <p class="large-text reveal delay-1">
             {% if profile.about_text %}
                 {{ profile.about_text|linebreaksbr }}
             {% else %}
                 Saya menggabungkan teknik informatika dengan desain UX/UI yang tajam untuk menciptakan karya yang tidak hanya berfungsi secara sempurna, namun juga mampu membuat pengguna berdecak kagum.
             {% endif %}
         </p>
-        <div class="cta-group" style="justify-content: center;">
+        <div class="cta-group reveal delay-2" style="justify-content: center;">
             <a href="#contact" class="btn-outline-accent">Hubungi Saya</a>
             {% if profile.cv_file %}
                 <a href="{{ profile.cv_file.url }}" target="_blank" class="btn-primary-bold" style="margin-left: 1rem;">Unduh CV</a>
@@ -37,12 +37,12 @@
 <!-- Sesi Pendidikan -->
 <section id="education" class="experience">
     <div class="section-header">
-        <h2 class="cinematic-section-title">RIWAYAT <span class="accent">PENDIDIKAN</span></h2>
+        <h2 class="cinematic-section-title reveal">RIWAYAT <span class="accent">PENDIDIKAN</span></h2>
     </div>
     <div class="timeline">
         {% if educations %}
             {% for edu in educations %}
-            <div class="timeline-item fade-in-up">
+            <div class="timeline-item reveal">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content glass-dark">
                     <span class="timeline-date">{{ edu.start_year }} - {% if edu.end_year %}{{ edu.end_year }}{% else %}Sekarang{% endif %}</span>
@@ -55,7 +55,7 @@
             </div>
             {% endfor %}
         {% else %}
-            <p style="text-align: center; color: var(--text-muted);">Belum ada riwayat pendidikan yang ditambahkan.</p>
+            <p style="text-align: center; color: var(--text-muted);" class="reveal">Belum ada riwayat pendidikan yang ditambahkan.</p>
         {% endif %}
     </div>
 </section>
@@ -63,12 +63,12 @@
 <!-- Sesi Pengalaman -->
 <section id="experience" class="experience">
     <div class="section-header">
-        <h2 class="cinematic-section-title">PERJALANAN <span class="accent">KARIR</span></h2>
+        <h2 class="cinematic-section-title reveal">PERJALANAN <span class="accent">KARIR</span></h2>
     </div>
     <div class="timeline">
         {% if experiences %}
             {% for exp in experiences %}
-            <div class="timeline-item fade-in-up">
+            <div class="timeline-item reveal">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content glass-dark">
                     <span class="timeline-date">{{ exp.start_date }} - {{ exp.end_date }}</span>
@@ -79,19 +79,19 @@
             </div>
             {% endfor %}
         {% else %}
-            <p style="text-align: center; color: var(--text-muted);">Belum ada pengalaman yang ditambahkan.</p>
+            <p style="text-align: center; color: var(--text-muted);" class="reveal">Belum ada pengalaman yang ditambahkan.</p>
         {% endif %}
     </div>
 </section>
 
 <section id="projects" class="projects">
     <div class="section-header">
-        <h2 class="cinematic-section-title">FEATURED <span class="accent">WORK</span></h2>
+        <h2 class="cinematic-section-title reveal">FEATURED <span class="accent">WORK</span></h2>
     </div>
     <div class="masonry-grid">
         {% if projects %}
             {% for project in projects %}
-            <div class="masonry-item glass-dark hover-zoom">
+            <div class="masonry-item glass-dark hover-zoom reveal zoom">
                 {% if project.image %}
                     <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-img">
                 {% else %}
@@ -109,7 +109,7 @@
             </div>
             {% endfor %}
         {% else %}
-            <div class="masonry-item glass-dark">
+            <div class="masonry-item glass-dark reveal zoom">
                 <div class="project-overlay" style="opacity: 1;">
                     <h3 class="project-title">Kosong</h3>
                     <p class="project-desc">Karya belum ditambahkan.</p>

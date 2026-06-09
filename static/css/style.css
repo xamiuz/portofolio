@@ -250,30 +250,28 @@ section {
     margin-bottom: 3rem;
 }
 
-/* Animations */
-.fade-in-up {
-    animation: fadeInUp 1s ease forwards;
+/* Cinematic Reveal Animations */
+.reveal {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(60px);
+    transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.slide-in {
-    animation: slideIn 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-    opacity: 0;
-    transform: translateY(-50px);
+.reveal.zoom {
+    transform: scale(0.95);
 }
 
-.delay-1 { animation-delay: 0.2s; }
-.delay-2 { animation-delay: 0.4s; }
-.delay-3 { animation-delay: 0.6s; }
-
-@keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
 
-@keyframes slideIn {
-    to { opacity: 1; transform: translateY(0); }
-}
+/* Delay modifiers for sequenced reveals */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
 
 @media (max-width: 768px) {
     .nav-links { display: none; }
