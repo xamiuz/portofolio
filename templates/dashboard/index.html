@@ -1,0 +1,44 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Semua Proyek</h1>
+    <a href="{% url 'dashboard_create' %}" class="btn-primary">+ Tambah Proyek</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Cover</th>
+            <th>Judul</th>
+            <th>Tags</th>
+            <th>Tanggal Dibuat</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for project in projects %}
+        <tr>
+            <td>
+                {% if project.image %}
+                    <img src="{{ project.image.url }}" alt="Cover">
+                {% else %}
+                    <span style="color:#666; font-size:0.8rem;">No Image</span>
+                {% endif %}
+            </td>
+            <td>{{ project.title }}</td>
+            <td>{{ project.tags }}</td>
+            <td>{{ project.created_at|date:"d M Y" }}</td>
+            <td>
+                <a href="{% url 'dashboard_edit' project.id %}" class="btn-edit">Edit</a>
+                <a href="{% url 'dashboard_delete' project.id %}" class="btn-danger">Hapus</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" style="text-align: center; color: #666; padding: 2rem;">Belum ada proyek yang ditambahkan.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

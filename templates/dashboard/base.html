@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dasbor Manajemen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0f0f0f; color: #eaeaea; display: flex; min-height: 100vh; }
+        .sidebar {
+            width: 250px;
+            background: #1a1a1a;
+            border-right: 1px solid #333;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar h2 { font-family: 'Outfit', sans-serif; color: #E50914; margin-bottom: 2rem; }
+        .sidebar a {
+            color: #aaa;
+            text-decoration: none;
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        .sidebar a:hover { background: #333; color: #fff; }
+        .sidebar .logout { margin-top: auto; color: #E50914; }
+        .sidebar .logout:hover { background: rgba(229, 9, 20, 0.1); }
+        .main-content {
+            flex: 1;
+            padding: 3rem;
+            background: #0f0f0f;
+            overflow-y: auto;
+        }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid #333; padding-bottom: 1rem; }
+        .btn-primary { background: #E50914; color: #fff; padding: 0.6rem 1.2rem; text-decoration: none; border-radius: 6px; font-weight: bold; border: none; cursor: pointer; }
+        .btn-danger { background: transparent; color: #E50914; border: 1px solid #E50914; padding: 0.4rem 0.8rem; border-radius: 4px; text-decoration: none; }
+        .btn-edit { background: #333; color: #fff; padding: 0.4rem 0.8rem; border-radius: 4px; text-decoration: none; margin-right: 0.5rem; }
+        /* Forms */
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; color: #aaa; }
+        .form-input { width: 100%; padding: 0.8rem; background: #1a1a1a; border: 1px solid #333; color: #fff; border-radius: 6px; font-family: 'Inter', sans-serif;}
+        .form-input:focus { outline: none; border-color: #E50914; }
+        /* Table */
+        table { width: 100%; border-collapse: collapse; background: #1a1a1a; border-radius: 8px; overflow: hidden; }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #333; }
+        th { background: #222; color: #aaa; font-weight: normal; }
+        td img { width: 60px; height: 40px; object-fit: cover; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>DASBOR.</h2>
+        <a href="{% url 'dashboard_index' %}">Karya & Proyek</a>
+        <a href="{% url 'experience_index' %}">Pengalaman Kerja</a>
+        <a href="{% url 'dashboard_profile' %}">Profil & CV</a>
+        <a href="{% url 'home' %}" target="_blank" style="margin-top: 1rem; border: 1px solid #333;">Lihat Website</a>
+        <a href="{% url 'dashboard_logout' %}" class="logout">Keluar</a>
+    </div>
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Website Portofolio Profesional Lulusan Teknik Informatika">
+    <title>{% block title %}Portofolio Profesional{% endblock %}</title>
+    <!-- Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Styling -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- Navbar dengan Glassmorphism -->
+    <nav class="navbar glass">
+        <div class="logo">Porto<span class="accent">.</span></div>
+        <ul class="nav-links">
+            <li><a href="#hero">Beranda</a></li>
+            <li><a href="#about">Profil</a></li>
+            <li><a href="#projects">Proyek</a></li>
+            <li><a href="#contact" class="btn-primary-small">Hubungi Saya</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026. Dibuat dengan aman menggunakan Django.</p>
+    </footer>
+</body>
+</html>

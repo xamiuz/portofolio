@@ -1,0 +1,38 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Pengalaman Kerja / Pendidikan</h1>
+    <a href="{% url 'experience_create' %}" class="btn-primary">+ Tambah Pengalaman</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Posisi / Peran</th>
+            <th>Perusahaan</th>
+            <th>Durasi</th>
+            <th>Urutan</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for exp in experiences %}
+        <tr>
+            <td><strong>{{ exp.title }}</strong></td>
+            <td>{{ exp.company }}</td>
+            <td>{{ exp.start_date }} - {{ exp.end_date }}</td>
+            <td>{{ exp.order }}</td>
+            <td>
+                <a href="{% url 'experience_edit' exp.id %}" class="btn-edit">Edit</a>
+                <a href="{% url 'experience_delete' exp.id %}" class="btn-danger">Hapus</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" style="text-align: center; color: #666; padding: 2rem;">Belum ada pengalaman yang ditambahkan.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

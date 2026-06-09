@@ -1,0 +1,29 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ title }}</h1>
+    <a href="javascript:history.back()" style="color: #aaa; text-decoration: none;">&larr; Kembali</a>
+</div>
+
+<form method="POST" enctype="multipart/form-data" style="max-width: 600px; background: #1a1a1a; padding: 2rem; border-radius: 8px;">
+    {% csrf_token %}
+    
+    {% for field in form %}
+    <div class="form-group">
+        <label style="display: block; margin-bottom: 0.5rem; color: #aaa;">{{ field.label }}</label>
+        {{ field }}
+        {% if field.help_text %}
+            <small style="color: #666; display: block; margin-top: 0.2rem;">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+            <p style="color: #E50914; margin-top: 0.2rem; font-size: 0.9rem;">{{ error }}</p>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    
+    <div style="margin-top: 2rem;">
+        <button type="submit" class="btn-primary">Simpan</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Hapus Proyek</h1>
+</div>
+
+<div style="background: #1a1a1a; padding: 2rem; border-radius: 8px; max-width: 500px;">
+    <h3 style="margin-bottom: 1rem; color: #E50914;">Konfirmasi Penghapusan</h3>
+    <p style="margin-bottom: 2rem; color: #ccc;">Apakah Anda yakin ingin menghapus proyek "<strong>{{ project.title }}</strong>"? Tindakan ini tidak dapat dibatalkan.</p>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn-primary" style="margin-right: 1rem;">Ya, Hapus</button>
+        <a href="{% url 'dashboard_index' %}" style="color: #aaa; text-decoration: none;">Batal</a>
+    </form>
+</div>
+{% endblock %}
