@@ -4,20 +4,20 @@
 {% block content %}
 <section id="hero" class="hero cinematic-hero">
     <div class="hero-content">
-        <h2 class="subtitle cinematic-subtitle reveal delay-1">Memperkenalkan</h2>
-        <h1 class="title cinematic-title reveal delay-2">LEVI<br><span class="accent">WILSON</span></h1>
-        <p class="description cinematic-description reveal delay-3">
+        <h2 class="subtitle cinematic-subtitle reveal left delay-1">Memperkenalkan</h2>
+        <h1 class="title cinematic-title reveal right delay-2">LEVI<br><span class="accent">WILSON</span></h1>
+        <p class="description cinematic-description reveal zoom delay-3">
             Desainer Website & Software Engineer di era modern. Membangun masa depan desain web yang responsif, estetis, dan sinematik.
         </p>
-        <div class="cta-group reveal delay-4">
+        <div class="cta-group reveal left delay-4">
             <a href="#about" class="btn-primary-bold">Eksplorasi Profil</a>
         </div>
     </div>
 </section>
 
 <section id="about" class="about cinematic-about">
-    <div class="about-container glass-dark reveal">
-        <h2 class="cinematic-section-title reveal">BEHIND THE <span class="accent">CODE</span></h2>
+    <div class="about-container glass-dark reveal zoom">
+        <h2 class="cinematic-section-title reveal right">BEHIND THE <span class="accent">CODE</span></h2>
         <p class="large-text reveal delay-1">
             {% if profile.about_text %}
                 {{ profile.about_text|linebreaksbr }}
@@ -42,7 +42,7 @@
     <div class="timeline">
         {% if educations %}
             {% for edu in educations %}
-            <div class="timeline-item reveal">
+            <div class="timeline-item reveal {% cycle 'right' 'left' %}">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content glass-dark">
                     <span class="timeline-date">{{ edu.start_year }} - {% if edu.end_year %}{{ edu.end_year }}{% else %}Sekarang{% endif %}</span>
@@ -68,7 +68,7 @@
     <div class="timeline">
         {% if experiences %}
             {% for exp in experiences %}
-            <div class="timeline-item reveal">
+            <div class="timeline-item reveal {% cycle 'right' 'left' %}">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content glass-dark">
                     <span class="timeline-date">{{ exp.start_date }} - {{ exp.end_date }}</span>
