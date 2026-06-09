@@ -69,6 +69,32 @@
     </div>
 </section>
 
+<!-- Sesi Pendidikan -->
+<section id="education" class="experience">
+    <div class="section-header">
+        <h2 class="cinematic-section-title">RIWAYAT <span class="accent">PENDIDIKAN</span></h2>
+    </div>
+    <div class="timeline">
+        {% if educations %}
+            {% for edu in educations %}
+            <div class="timeline-item fade-in-up">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content glass-dark">
+                    <span class="timeline-date">{{ edu.start_year }} - {% if edu.end_year %}{{ edu.end_year }}{% else %}Sekarang{% endif %}</span>
+                    <h3 class="timeline-title">{{ edu.degree }}</h3>
+                    <h4 class="timeline-company">{{ edu.institution }}</h4>
+                    {% if edu.description %}
+                        <p class="timeline-desc">{{ edu.description|linebreaksbr }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p style="text-align: center; color: var(--text-muted);">Belum ada riwayat pendidikan yang ditambahkan.</p>
+        {% endif %}
+    </div>
+</section>
+
 <!-- Sesi Pengalaman -->
 <section id="experience" class="experience">
     <div class="section-header">

@@ -2,21 +2,23 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Project, Profile, Experience
+from .models import Project, Profile, Experience, Education
 from .forms import ProjectForm, ProfileForm, ExperienceForm
 
 def home(request):
-    projects = Project.objects.all()
+    projects = Project.objects.all().order_by('-created_at')
     for proj in projects:
         proj.tag_list = [tag.strip() for tag in proj.tags.split(',') if tag.strip()]
         
     profile = Profile.objects.first()
-    experiences = Experience.objects.all()
+    experiences = Experience.objects.all().order_by('-start_date')
+    educations = Education.objects.all().order_by('-start_year')
     
     context = {
         'projects': projects,
         'profile': profile,
-        'experiences': experiences
+        'experiences': experiences,
+        'educations': educations,
     }
     return render(request, 'home.html', context)
 

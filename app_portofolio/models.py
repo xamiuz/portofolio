@@ -35,3 +35,16 @@ class Experience(models.Model):
 
     def __str__(self):
         return f"{self.title} di {self.company}"
+
+class Education(models.Model):
+    degree = models.CharField(max_length=200, verbose_name="Gelar/Jurusan")
+    institution = models.CharField(max_length=200, verbose_name="Nama Institusi/Universitas")
+    description = models.TextField(verbose_name="Deskripsi/Prestasi", blank=True)
+    start_year = models.CharField(max_length=4, verbose_name="Tahun Mulai")
+    end_year = models.CharField(max_length=4, verbose_name="Tahun Lulus (Atau 'Sekarang')", blank=True)
+
+    class Meta:
+        verbose_name_plural = "Pendidikan"
+
+    def __str__(self):
+        return f"{self.degree} di {self.institution}"
