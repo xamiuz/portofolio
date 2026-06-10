@@ -244,7 +244,7 @@ section {
 }
 
 .large-text {
-    font-size: 1.5rem;
+    font-size: 1.15rem;
     line-height: 1.8;
     color: var(--text-muted);
     margin-bottom: 3rem;
