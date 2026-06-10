@@ -170,6 +170,12 @@ section {
     padding: 8rem 5%;
 }
 
+@media (max-width: 768px) {
+    section {
+        padding: 4rem 5%;
+    }
+}
+
 .cinematic-section-title {
     font-size: 3rem;
     margin-bottom: 4rem;
@@ -179,7 +185,7 @@ section {
 /* Masonry Grid */
 .masonry-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 2rem;
     grid-auto-rows: 400px; /* Base height for cinematic posters */
 }
@@ -295,11 +301,19 @@ section {
 .delay-5 { transition-delay: 0.5s; }
 
 @media (max-width: 768px) {
-    .nav-links { display: none; }
-    .cinematic-title { font-size: 4rem; }
-    .about-container { padding: 2rem; }
+    .navbar { padding: 1rem 5%; }
+    .nav-links { display: none; } /* TODO: Hamburger menu if needed */
+    .cinematic-title { font-size: clamp(3rem, 12vw, 4rem); }
+    .cinematic-section-title { font-size: 2rem; margin-bottom: 2rem; }
+    .about-container { padding: 2rem 1.5rem; }
     .timeline::before { left: 20px; }
-    .timeline-content { width: calc(100% - 60px); margin-left: 60px !important; }
+    .timeline-content { 
+        width: calc(100% - 60px); 
+        margin-left: 50px !important; 
+        margin-right: 0 !important;
+        text-align: left !important;
+        padding: 1.5rem;
+    }
     .timeline-dot { left: 20px !important; }
 }
 
