@@ -48,3 +48,18 @@ class Education(models.Model):
 
     def __str__(self):
         return f"{self.degree} di {self.institution}"
+
+class Award(models.Model):
+    title = models.CharField(max_length=200, verbose_name="Judul Penghargaan")
+    description = models.TextField(verbose_name="Deskripsi (Opsional)", blank=True)
+    image = models.ImageField(upload_to='awards/', verbose_name="Gambar/Sertifikat")
+    date = models.CharField(max_length=50, verbose_name="Tanggal/Tahun", blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Penghargaan"
+        verbose_name_plural = "Penghargaan"
+        ordering = ['-created_at']

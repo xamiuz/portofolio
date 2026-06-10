@@ -1,5 +1,5 @@
 from django import forms
-from .models import Project, Profile, Experience
+from .models import Project, Profile, Experience, Award
 
 class ProjectForm(forms.ModelForm):
     class Meta:
@@ -32,4 +32,15 @@ class ExperienceForm(forms.ModelForm):
             'end_date': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Sekarang'}),
             'description': forms.Textarea(attrs={'class': 'form-input', 'rows': 4}),
             'order': forms.NumberInput(attrs={'class': 'form-input'}),
+        }
+
+class AwardForm(forms.ModelForm):
+    class Meta:
+        model = Award
+        fields = ['title', 'description', 'image', 'date']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Judul Penghargaan'}),
+            'description': forms.Textarea(attrs={'class': 'form-input', 'rows': 4, 'placeholder': 'Deskripsi Singkat'}),
+            'date': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Contoh: 2024 atau 12 Nov 2023'}),
+            'image': forms.FileInput(attrs={'class': 'form-input-file'}),
         }

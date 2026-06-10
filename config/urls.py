@@ -38,6 +38,12 @@ urlpatterns = [
     path('dasbor/pengalaman/tambah/', views.experience_create, name='experience_create'),
     path('dasbor/pengalaman/edit/<int:id>/', views.experience_edit, name='experience_edit'),
     path('dasbor/pengalaman/hapus/<int:id>/', views.experience_delete, name='experience_delete'),
+    
+    # Award URLs
+    path('dasbor/penghargaan/', views.award_index, name='award_index'),
+    path('dasbor/penghargaan/tambah/', views.award_create, name='award_create'),
+    path('dasbor/penghargaan/edit/<int:id>/', views.award_edit, name='award_edit'),
+    path('dasbor/penghargaan/hapus/<int:id>/', views.award_delete, name='award_delete'),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,44 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Daftar Penghargaan & Sertifikat</h1>
+    <a href="{% url 'award_create' %}" class="btn-primary">+ Tambah Penghargaan</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Gambar/Sertifikat</th>
+            <th>Judul</th>
+            <th>Tanggal/Tahun</th>
+            <th>Dibuat Pada</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for award in awards %}
+        <tr>
+            <td>
+                {% if award.image %}
+                    <img src="{{ award.image.url }}" alt="Cover">
+                {% else %}
+                    <span style="color:#666; font-size:0.8rem;">No Image</span>
+                {% endif %}
+            </td>
+            <td>{{ award.title }}</td>
+            <td>{{ award.date }}</td>
+            <td>{{ award.created_at|date:"d M Y" }}</td>
+            <td>
+                <a href="{% url 'award_edit' award.id %}" class="btn-edit">Edit</a>
+                <a href="{% url 'award_delete' award.id %}" class="btn-danger">Hapus</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" style="text-align: center; color: #666; padding: 2rem;">Belum ada penghargaan yang ditambahkan.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

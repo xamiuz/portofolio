@@ -94,6 +94,43 @@
     </div>
 </section>
 
+<section id="awards" class="projects">
+    <div class="section-header">
+        <h2 class="cinematic-section-title reveal">PENGHARGAAN & <span class="accent">PRESTASI</span></h2>
+    </div>
+    <div class="masonry-grid">
+        {% if awards %}
+            {% for award in awards %}
+            <div class="masonry-item glass-dark hover-zoom reveal zoom">
+                {% if award.image %}
+                    <img src="{{ award.image.url }}" alt="{{ award.title }}" class="project-img" style="object-fit: contain; background: #111;">
+                {% else %}
+                    <div class="project-img-placeholder"></div>
+                {% endif %}
+                <div class="project-overlay">
+                    <h3 class="project-title">{{ award.title }}</h3>
+                    {% if award.description %}
+                        <p class="project-desc">{{ award.description|linebreaksbr }}</p>
+                    {% endif %}
+                    {% if award.date %}
+                        <div class="project-tags">
+                            <span class="badge">{{ award.date }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="masonry-item glass-dark reveal zoom">
+                <div class="project-overlay" style="opacity: 1;">
+                    <h3 class="project-title">Belum ada data</h3>
+                    <p class="project-desc">Penghargaan belum ditambahkan.</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
 <section id="projects" class="projects">
     <div class="section-header">
         <h2 class="cinematic-section-title reveal">FEATURED <span class="accent">WORK</span></h2>

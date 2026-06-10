@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from .models import Project, Profile, Experience, Education
-from .forms import ProjectForm, ProfileForm, ExperienceForm
+from .models import Project, Profile, Experience, Education, Award
+from .forms import ProjectForm, ProfileForm, ExperienceForm, AwardForm
 
 def home(request):
     projects = Project.objects.all().order_by('-created_at')
@@ -13,12 +13,14 @@ def home(request):
     profile = Profile.objects.first()
     experiences = Experience.objects.all().order_by('-order')
     educations = Education.objects.all().order_by('start_year')
+    awards = Award.objects.all()
     
     context = {
         'projects': projects,
         'profile': profile,
         'experiences': experiences,
         'educations': educations,
+        'awards': awards,
     }
     return render(request, 'home.html', context)
 
@@ -130,3 +132,40 @@ def experience_delete(request, id):
         exp.delete()
         return redirect('experience_index')
     return render(request, 'dashboard/delete_confirm.html', {'item': exp, 'back_url': 'experience_index'})
+
+# -- Award CRUD --
+@login_required(login_url='dashboard_login')
+def award_index(request):
+    awards = Award.objects.all()
+    return render(request, 'dashboard/award_index.html', {'awards': awards})
+
+@login_required(login_url='dashboard_login')
+def award_create(request):
+    if request.method == 'POST':
+        form = AwardForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('award_index')
+    else:
+        form = AwardForm()
+    return render(request, 'dashboard/form.html', {'form': form, 'title': 'Tambah Penghargaan'})
+
+@login_required(login_url='dashboard_login')
+def award_edit(request, id):
+    award = get_object_or_404(Award, id=id)
+    if request.method == 'POST':
+        form = AwardForm(request.POST, request.FILES, instance=award)
+        if form.is_valid():
+            form.save()
+            return redirect('award_index')
+    else:
+        form = AwardForm(instance=award)
+    return render(request, 'dashboard/form.html', {'form': form, 'title': 'Edit Penghargaan'})
+
+@login_required(login_url='dashboard_login')
+def award_delete(request, id):
+    award = get_object_or_404(Award, id=id)
+    if request.method == 'POST':
+        award.delete()
+        return redirect('award_index')
+    return render(request, 'dashboard/delete_confirm.html', {'item': award, 'back_url': 'award_index'})
