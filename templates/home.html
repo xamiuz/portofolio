@@ -29,6 +29,8 @@
             <a href="#contact" class="btn-outline-accent">Hubungi Saya</a>
             {% if profile.cv_file %}
                 <a href="{{ profile.cv_file.url }}" target="_blank" class="btn-primary-bold" style="margin-left: 1rem;">Unduh CV</a>
+            {% else %}
+                <a href="{% static 'docs/CV_Pandu_Wirayuda.pdf' %}" target="_blank" class="btn-primary-bold" style="margin-left: 1rem;">Unduh CV</a>
             {% endif %}
         </div>
     </div>
