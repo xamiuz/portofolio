@@ -11,8 +11,8 @@ def home(request):
         proj.tag_list = [tag.strip() for tag in proj.tags.split(',') if tag.strip()]
         
     profile = Profile.objects.first()
-    experiences = Experience.objects.all().order_by('-start_date')
-    educations = Education.objects.all().order_by('-start_year')
+    experiences = Experience.objects.all().order_by('start_date')
+    educations = Education.objects.all().order_by('start_year')
     
     context = {
         'projects': projects,
