@@ -49,9 +49,17 @@
                 <div class="timeline-content glass-dark">
                     <span class="timeline-date">{{ edu.start_year }} - {% if edu.end_year %}{{ edu.end_year }}{% else %}Sekarang{% endif %}</span>
                     <h3 class="timeline-title">{{ edu.degree }}</h3>
-                    <h4 class="timeline-company">{{ edu.institution }}</h4>
                     {% if edu.description %}
-                        <p class="timeline-desc">{{ edu.description|linebreaksbr }}</p>
+                        <div class="timeline-interactive" onclick="this.querySelector('.timeline-desc-container').classList.toggle('open'); this.querySelector('.arrow-icon').classList.toggle('open')" style="cursor: pointer;">
+                            <h4 class="timeline-company">{{ edu.institution }} <span class="arrow-icon" style="float: right; font-size: 0.8rem; transition: transform 0.3s ease;">▼</span></h4>
+                            <div class="timeline-desc-container" style="max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.5s ease, opacity 0.5s ease;">
+                                <div class="timeline-desc-inner" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--glass-border);">
+                                    <p class="timeline-desc">{{ edu.description|linebreaksbr }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <h4 class="timeline-company">{{ edu.institution }}</h4>
                     {% endif %}
                 </div>
             </div>

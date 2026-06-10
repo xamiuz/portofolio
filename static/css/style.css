@@ -372,6 +372,15 @@ section {
     margin-bottom: 1rem;
 }
 
+.timeline-desc-container.open {
+    max-height: 500px !important;
+    opacity: 1 !important;
+}
+
+.arrow-icon.open {
+    transform: rotate(180deg);
+}
+
 /* Footer */
 .footer {
     text-align: center;
