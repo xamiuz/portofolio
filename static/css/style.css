@@ -19,8 +19,19 @@ body {
     color: var(--text);
     line-height: 1.6;
     overflow-x: hidden;
-    /* Efek grain sinematik halus */
+    /* Efek gradient sinematik */
     background-image: radial-gradient(circle at 50% 50%, rgba(20, 20, 20, 1) 0%, rgba(3, 3, 3, 1) 100%);
+}
+
+/* Efek grain/noise film klasik */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.04;
 }
 
 h1, h2, h3, .logo {
@@ -38,6 +49,7 @@ h1, h2, h3, .logo {
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
 .glass-dark {
@@ -45,6 +57,7 @@ h1, h2, h3, .logo {
     border: 1px solid var(--glass-border);
     border-radius: 12px;
     overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(229, 9, 20, 0.06);
 }
 
 /* Navbar */
@@ -253,20 +266,20 @@ section {
 /* Cinematic Reveal Animations */
 .reveal {
     opacity: 0;
-    transform: translateY(60px); /* Default is slide-up */
-    transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+    transform: translateY(40px); /* Default is slide-up */
+    transition: all 1.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal.left {
-    transform: translateX(-60px);
+    transform: translateX(-40px);
 }
 
 .reveal.right {
-    transform: translateX(60px);
+    transform: translateX(40px);
 }
 
 .reveal.zoom {
-    transform: scale(0.85);
+    transform: scale(0.92);
 }
 
 .reveal.active {
