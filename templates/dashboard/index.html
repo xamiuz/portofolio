@@ -30,6 +30,7 @@
             <td>{{ project.tags }}</td>
             <td>{{ project.created_at|date:"d M Y" }}</td>
             <td>
+                <a href="{% url 'media_index' project.id %}" class="btn-primary" style="background: #007bff; padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.9rem; margin-right: 0.5rem;">Media</a>
                 <a href="{% url 'dashboard_edit' project.id %}" class="btn-edit">Edit</a>
                 <a href="{% url 'dashboard_delete' project.id %}" class="btn-danger">Hapus</a>
             </td>

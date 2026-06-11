@@ -415,3 +415,118 @@ section {
 .footer p:hover {
     opacity: 1;
 }
+
+/* Lightbox Modal */
+.lightbox {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 9999;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.lightbox-content-container {
+    position: relative;
+    margin: auto;
+    width: 90%;
+    max-width: 1200px;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-content {
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-content img, .lightbox-content video {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    object-fit: contain;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+    color: var(--accent);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.lightbox-prev,
+.lightbox-next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    transition: 0.3s;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+    background: rgba(0,0,0,0.5);
+    border: none;
+}
+
+.lightbox-next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.lightbox-prev {
+    left: 0;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background-color: var(--accent);
+}
+
+.lightbox-indicators {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.lightbox-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background-color: #555;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.lightbox-indicator.active, .lightbox-indicator:hover {
+    background-color: var(--accent);
+    transform: scale(1.2);
+}

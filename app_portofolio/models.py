@@ -15,6 +15,23 @@ class Project(models.Model):
         verbose_name_plural = "Proyek-Proyek"
         ordering = ['-created_at']
 
+class ProjectMedia(models.Model):
+    MEDIA_TYPES = (
+        ('image', 'Gambar'),
+        ('video', 'Video'),
+    )
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='media')
+    file = models.FileField(upload_to='project_media/', verbose_name="File Media")
+    media_type = models.CharField(max_length=10, choices=MEDIA_TYPES, default='image', verbose_name="Jenis Media")
+    order = models.IntegerField(default=0, verbose_name="Urutan")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['order', 'created_at']
+
+    def __str__(self):
+        return f"{self.project.title} - {self.media_type}"
+
 class Profile(models.Model):
     about_text = models.TextField(verbose_name="Tentang Saya", blank=True)
     cv_file = models.FileField(upload_to='cv/', blank=True, null=True, verbose_name="File CV (PDF/Word)")

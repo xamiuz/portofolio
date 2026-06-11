@@ -32,6 +32,11 @@ urlpatterns = [
     path('dasbor/edit/<int:id>/', views.dashboard_edit, name='dashboard_edit'),
     path('dasbor/hapus/<int:id>/', views.dashboard_delete, name='dashboard_delete'),
     
+    # Project Media URLs
+    path('dasbor/media/<int:project_id>/', views.media_index, name='media_index'),
+    path('dasbor/media/<int:project_id>/tambah/', views.media_create, name='media_create'),
+    path('dasbor/media/hapus/<int:id>/', views.media_delete, name='media_delete'),
+    
     # Profile & Experience URLs
     path('dasbor/profil/', views.dashboard_profile, name='dashboard_profile'),
     path('dasbor/pengalaman/', views.experience_index, name='experience_index'),
