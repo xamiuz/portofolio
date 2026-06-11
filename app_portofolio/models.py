@@ -21,7 +21,8 @@ class ProjectMedia(models.Model):
         ('video', 'Video'),
     )
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='media')
-    file = models.FileField(upload_to='project_media/', verbose_name="File Media")
+    file = models.FileField(upload_to='project_media/', blank=True, null=True, verbose_name="File Media (Kosongkan jika pakai link)")
+    external_url = models.URLField(max_length=500, blank=True, null=True, verbose_name="Link Eksternal (Google Drive / YouTube)")
     media_type = models.CharField(max_length=10, choices=MEDIA_TYPES, default='image', verbose_name="Jenis Media")
     order = models.IntegerField(default=0, verbose_name="Urutan")
     created_at = models.DateTimeField(auto_now_add=True)

@@ -48,9 +48,10 @@ class AwardForm(forms.ModelForm):
 class ProjectMediaForm(forms.ModelForm):
     class Meta:
         model = ProjectMedia
-        fields = ['file', 'media_type', 'order']
+        fields = ['file', 'external_url', 'media_type', 'order']
         widgets = {
             'media_type': forms.Select(attrs={'class': 'form-input'}),
             'file': forms.FileInput(attrs={'class': 'form-input-file'}),
+            'external_url': forms.URLInput(attrs={'class': 'form-input', 'placeholder': 'Opsional: Link Google Drive atau YouTube'}),
             'order': forms.NumberInput(attrs={'class': 'form-input'}),
         }

@@ -138,7 +138,7 @@
     <div class="masonry-grid">
         {% if projects %}
             {% for project in projects %}
-            <div class="masonry-item glass-dark hover-zoom reveal zoom" onclick="openLightbox(this)" data-media='[{"url": "{% if project.image %}{{ project.image.url }}{% endif %}", "type": "image"}{% for m in project.media.all %}, {"url": "{{ m.file.url }}", "type": "{{ m.media_type }}"}{% endfor %}]' style="cursor: pointer;">
+            <div class="masonry-item glass-dark hover-zoom reveal zoom" onclick="openLightbox(this)" data-media='[{"url": "{% if project.image %}{{ project.image.url }}{% endif %}", "type": "image"}{% for m in project.media.all %}, {"url": "{% if m.external_url %}{{ m.external_url }}{% elif m.file %}{{ m.file.url }}{% endif %}", "type": "{{ m.media_type }}"}{% endfor %}]' style="cursor: pointer;">
                 {% if project.image %}
                     <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-img">
                 {% else %}
