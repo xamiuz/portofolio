@@ -24,6 +24,57 @@ document.addEventListener("DOMContentLoaded", () => {
     reveals.forEach(reveal => {
         revealOnScroll.observe(reveal);
     });
+
+    // Project Filtering Logic
+    const filterContainer = document.getElementById('project-filters');
+    const projectItems = document.querySelectorAll('.masonry-item');
+    
+    if (filterContainer && projectItems.length > 0) {
+        let allTags = new Set();
+        
+        projectItems.forEach(item => {
+            const rawTags = item.getAttribute('data-tags');
+            if (rawTags) {
+                rawTags.split(',').forEach(tag => {
+                    const t = tag.trim();
+                    if (t) allTags.add(t);
+                });
+            }
+        });
+        
+        if (allTags.size > 0) {
+            let filterHtml = `<button class="filter-btn active" data-filter="all">Semua</button>`;
+            allTags.forEach(tag => {
+                filterHtml += `<button class="filter-btn" data-filter="${tag}">${tag}</button>`;
+            });
+            filterContainer.innerHTML = filterHtml;
+            
+            // Add click events
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    const filterValue = btn.getAttribute('data-filter');
+                    
+                    projectItems.forEach(item => {
+                        if (filterValue === 'all') {
+                            item.style.display = 'block';
+                        } else {
+                            const itemTags = item.getAttribute('data-tags') || "";
+                            const tagsArray = itemTags.split(',').map(t => t.trim());
+                            if (tagsArray.includes(filterValue)) {
+                                item.style.display = 'block';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+        }
+    }
 });
 
 // Lightbox Logic
