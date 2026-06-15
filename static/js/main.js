@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Project Filtering Logic
     const filterContainer = document.getElementById('project-filters');
-    const projectItems = document.querySelectorAll('.masonry-item');
+    const projectItems = document.querySelectorAll('#projects .masonry-item');
     
     if (filterContainer && projectItems.length > 0) {
         let tagCounts = {};
