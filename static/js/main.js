@@ -30,22 +30,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const projectItems = document.querySelectorAll('.masonry-item');
     
     if (filterContainer && projectItems.length > 0) {
-        let allTags = new Set();
+        let tagCounts = {};
         
         projectItems.forEach(item => {
             const rawTags = item.getAttribute('data-tags');
             if (rawTags) {
                 rawTags.split(',').forEach(tag => {
                     const t = tag.trim();
-                    if (t) allTags.add(t);
+                    if (t) {
+                        tagCounts[t] = (tagCounts[t] || 0) + 1;
+                    }
                 });
             }
         });
         
-        if (allTags.size > 0) {
-            let filterHtml = `<button class="filter-btn active" data-filter="all">Semua</button>`;
-            allTags.forEach(tag => {
-                filterHtml += `<button class="filter-btn" data-filter="${tag}">${tag}</button>`;
+        const tagsArray = Object.keys(tagCounts);
+        if (tagsArray.length > 0) {
+            let filterHtml = `<button class="filter-btn active" data-filter="all">Semua <span class="tag-count">${projectItems.length}</span></button>`;
+            tagsArray.forEach(tag => {
+                filterHtml += `<button class="filter-btn" data-filter="${tag}">${tag} <span class="tag-count">${tagCounts[tag]}</span></button>`;
             });
             filterContainer.innerHTML = filterHtml;
             
