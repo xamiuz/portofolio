@@ -14,8 +14,27 @@
     --glass-bg: rgba(13, 13, 18, 0.75);
     --glass-border: rgba(255, 255, 255, 0.06);
     --glass-border-strong: rgba(255, 255, 255, 0.12);
+    --glass-dark-bg: linear-gradient(145deg, rgba(18, 18, 26, 0.9), rgba(10, 10, 15, 0.95));
+    --project-img-bg: linear-gradient(135deg, #1a1a22, #12121a);
     --radius: 14px;
     --transition-base: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+html[data-theme="light"] {
+    --bg: #f8f9fa;
+    --bg-surface: #ffffff;
+    --text: #212529;
+    --text-muted: #495057;
+    --text-dim: #adb5bd;
+    --accent: #E50914; /* Tetap pertahankan merah sebagai accent */
+    --accent-soft: rgba(229, 9, 20, 0.1);
+    --accent-glow: rgba(229, 9, 20, 0.2);
+    --gold: #d4af37;
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(0, 0, 0, 0.08);
+    --glass-border-strong: rgba(0, 0, 0, 0.15);
+    --glass-dark-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(240, 240, 245, 0.95));
+    --project-img-bg: linear-gradient(135deg, #e9ecef, #dee2e6);
 }
 
 /* ============================================
@@ -40,6 +59,13 @@ body {
     background-image:
         radial-gradient(ellipse 80% 50% at 50% -10%, rgba(229, 9, 20, 0.08) 0%, transparent 60%),
         radial-gradient(ellipse 60% 40% at 80% 80%, rgba(100, 60, 200, 0.05) 0%, transparent 50%);
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+html[data-theme="light"] body {
+    background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(229, 9, 20, 0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(100, 60, 200, 0.03) 0%, transparent 50%);
 }
 
 /* Subtle grain overlay */
@@ -73,12 +99,12 @@ h1, h2, h3, h4, .logo {
 }
 
 .glass-dark {
-    background: linear-gradient(145deg, rgba(18, 18, 26, 0.9), rgba(10, 10, 15, 0.95));
+    background: var(--glass-dark-bg);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.6),
+        0 20px 60px rgba(0, 0, 0, 0.2),
         0 0 0 1px rgba(255,255,255,0.04),
         inset 0 1px 0 rgba(255,255,255,0.06);
     transition: var(--transition-base);
@@ -87,7 +113,7 @@ h1, h2, h3, h4, .logo {
 .glass-dark:hover {
     border-color: var(--glass-border-strong);
     box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.7),
+        0 30px 80px rgba(0, 0, 0, 0.3),
         0 0 0 1px rgba(229,9,20,0.1),
         inset 0 1px 0 rgba(255,255,255,0.08);
     transform: translateY(-4px);
@@ -174,6 +200,28 @@ h1, h2, h3, h4, .logo {
 }
 
 .btn-primary-small::after { display: none !important; }
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.theme-toggle:hover {
+    color: var(--accent);
+    background: rgba(229, 9, 20, 0.1);
+    transform: rotate(15deg);
+}
 
 /* ============================================
    HERO SECTION — Cinematic
@@ -468,7 +516,7 @@ section {
 .project-img-placeholder {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #1a1a22, #12121a);
+    background: var(--project-img-bg);
     display: flex; align-items: center; justify-content: center;
 }
 
