@@ -130,35 +130,33 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# Konfigurasi Storage untuk Media (Supabase S3 Compatible)
-AWS_ACCESS_KEY_ID = os.environ.get('SUPABASE_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('SUPABASE_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('SUPABASE_BUCKET_NAME', 'portofolio')
-AWS_S3_ENDPOINT_URL = os.environ.get('SUPABASE_ENDPOINT_URL')
+# Konfigurasi Storage untuk Media (Supabase REST API - lebih andal dari S3)
+SUPABASE_PROJECT_ID = 'aitgjqvhzlxjtozrffqw'
+SUPABASE_SERVICE_ROLE_KEY = os.environ.get('SUPABASE_SERVICE_ROLE_KEY', '')
+_supabase_bucket = os.environ.get('SUPABASE_BUCKET_NAME', 'portofolio')
 
-# Wajib untuk Supabase: path-style dan tanpa region agar signature cocok
-AWS_S3_ADDRESSING_STYLE = 'path'
-AWS_DEFAULT_ACL = None
-# JANGAN set AWS_S3_CUSTOM_DOMAIN — ini akan membelokkan upload ke URL yang salah
-AWS_S3_CUSTOM_DOMAIN = None
-
-STORAGES = {
-    "default": {
-        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage" if AWS_ACCESS_KEY_ID else "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
-
-# URL untuk menampilkan file media di browser (Supabase Public URL)
-_supabase_project_id = 'aitgjqvhzlxjtozrffqw'
-_supabase_bucket = AWS_STORAGE_BUCKET_NAME or 'portofolio'
-if AWS_ACCESS_KEY_ID:
-    MEDIA_URL = f'https://{_supabase_project_id}.supabase.co/storage/v1/object/public/{_supabase_bucket}/'
+if SUPABASE_SERVICE_ROLE_KEY:
+    STORAGES = {
+        "default": {
+            "BACKEND": "app_portofolio.storage_backends.SupabaseStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
+    MEDIA_URL = f'https://{SUPABASE_PROJECT_ID}.supabase.co/storage/v1/object/public/{_supabase_bucket}/'
 else:
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Security settings
 SECURE_BROWSER_XSS_FILTER = True
