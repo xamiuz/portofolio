@@ -541,9 +541,9 @@ section {
 .lightbox-info {
     width: 100%;
     max-width: 900px;
-    margin: 20px auto 0;
+    margin: 0 auto 20px auto;
     color: #fff;
-    text-align: left;
+    text-align: center;
     padding: 0 20px;
 }
 .lightbox-info h3 {
@@ -555,7 +555,3 @@ section {
     line-height: 1.6;
     color: #ddd;
 }
-
-
-.lightbox-info { padding-bottom: 50px; }
-
