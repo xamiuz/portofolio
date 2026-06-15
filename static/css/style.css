@@ -238,6 +238,10 @@ section {
     font-size: 0.9rem;
     color: var(--text-muted);
     margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
 }
 
 .badge {
@@ -530,3 +534,24 @@ section {
     background-color: var(--accent);
     transform: scale(1.2);
 }
+
+
+/* Lightbox Info Section */
+.lightbox-info {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto 0;
+    color: #fff;
+    text-align: left;
+    padding: 0 20px;
+}
+.lightbox-info h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+.lightbox-info p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #ddd;
+}
+

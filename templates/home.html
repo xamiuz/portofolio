@@ -138,7 +138,7 @@
     <div class="masonry-grid">
         {% if projects %}
             {% for project in projects %}
-            <div class="masonry-item glass-dark hover-zoom reveal zoom" onclick="openLightbox(this)" data-media='[{"url": "{% if project.image %}{{ project.image.url }}{% endif %}", "type": "image"}{% for m in project.media.all %}, {"url": "{% if m.external_url %}{{ m.external_url }}{% elif m.file %}{{ m.file.url }}{% endif %}", "type": "{{ m.media_type }}"}{% endfor %}]' style="cursor: pointer;">
+            <div class="masonry-item glass-dark hover-zoom reveal zoom" onclick="openLightbox(this)" data-title="{{ project.title|escapejs }}" data-desc="{{ project.description|escapejs }}" data-media='[{"url": "{% if project.image %}{{ project.image.url }}{% endif %}", "type": "image"}{% for m in project.media.all %}, {"url": "{% if m.external_url %}{{ m.external_url }}{% elif m.file %}{{ m.file.url }}{% endif %}", "type": "{{ m.media_type }}"}{% endfor %}]' style="cursor: pointer;">
                 {% if project.image %}
                     <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-img">
                 {% else %}
@@ -175,6 +175,10 @@
         <button class="lightbox-next" onclick="changeSlide(1)">&#10095;</button>
     </div>
     <div id="lightbox-indicators" class="lightbox-indicators"></div>
+    <div id="lightbox-info" class="lightbox-info">
+        <h3 id="lightbox-title"></h3>
+        <p id="lightbox-desc"></p>
+    </div>
 </div>
 
 {% endblock %}

@@ -29,11 +29,15 @@ document.addEventListener("DOMContentLoaded", () => {
 // Lightbox Logic
 let currentMediaIndex = 0;
 let currentMediaList = [];
+let currentTitle = "";
+let currentDesc = "";
 
 function openLightbox(element) {
     const rawData = element.getAttribute('data-media');
     if (!rawData) return;
     
+    currentTitle = element.getAttribute('data-title') || "";
+    currentDesc = element.getAttribute('data-desc') || "";
     currentMediaList = JSON.parse(rawData);
     if (currentMediaList.length === 0) return;
 
@@ -109,4 +113,12 @@ function updateLightboxContent() {
         indicatorsHtml += `<span class="lightbox-indicator ${activeClass}" onclick="currentMediaIndex = ${i}; updateLightboxContent();"></span>`;
     }
     indicatorsDiv.innerHTML = indicatorsHtml;
+    
+    // Update title and desc
+    const titleEl = document.getElementById('lightbox-title');
+    const descEl = document.getElementById('lightbox-desc');
+    if (titleEl && descEl) {
+        titleEl.textContent = currentTitle;
+        descEl.textContent = currentDesc;
+    }
 }
