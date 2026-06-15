@@ -31,6 +31,7 @@ let currentMediaIndex = 0;
 let currentMediaList = [];
 let currentTitle = "";
 let currentDesc = "";
+let currentTags = [];
 
 function openLightbox(element) {
     const rawData = element.getAttribute('data-media');
@@ -38,6 +39,9 @@ function openLightbox(element) {
     
     currentTitle = element.getAttribute('data-title') || "";
     currentDesc = element.getAttribute('data-desc') || "";
+    const rawTags = element.getAttribute('data-tags');
+    currentTags = rawTags ? rawTags.split(',') : [];
+    
     currentMediaList = JSON.parse(rawData);
     if (currentMediaList.length === 0) return;
 
@@ -114,11 +118,21 @@ function updateLightboxContent() {
     }
     indicatorsDiv.innerHTML = indicatorsHtml;
     
-    // Update title and desc
+    // Update title, desc, dan tags
     const titleEl = document.getElementById('lightbox-title');
     const descEl = document.getElementById('lightbox-desc');
+    const tagsEl = document.getElementById('lightbox-tags');
     if (titleEl && descEl) {
         titleEl.textContent = currentTitle;
         descEl.textContent = currentDesc;
+    }
+    if (tagsEl) {
+        let tagsHtml = "";
+        currentTags.forEach(tag => {
+            if (tag.trim() !== "") {
+                tagsHtml += `<span class="badge">${tag.trim()}</span>`;
+            }
+        });
+        tagsEl.innerHTML = tagsHtml;
     }
 }

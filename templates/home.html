@@ -138,7 +138,7 @@
     <div class="masonry-grid">
         {% if projects %}
             {% for project in projects %}
-            <div class="masonry-item glass-dark hover-zoom reveal zoom" onclick="openLightbox(this)" data-title="{{ project.title }}" data-desc="{{ project.description }}" data-media='[{% for m in project.media.all %}{% if not forloop.first %}, {% endif %}{"url": "{% if m.external_url %}{{ m.external_url }}{% elif m.file %}{{ m.file.url }}{% endif %}", "type": "{{ m.media_type }}"}{% endfor %}]' style="cursor: pointer;">
+            <div class="masonry-item glass-dark hover-zoom reveal zoom" onclick="openLightbox(this)" data-title="{{ project.title }}" data-desc="{{ project.description }}" data-tags="{% for tag in project.tag_list %}{{ tag }}{% if not forloop.last %},{% endif %}{% endfor %}" data-media='[{% for m in project.media.all %}{% if not forloop.first %}, {% endif %}{"url": "{% if m.external_url %}{{ m.external_url }}{% elif m.file %}{{ m.file.url }}{% endif %}", "type": "{{ m.media_type }}"}{% endfor %}]' style="cursor: pointer;">
                 {% if project.image %}
                     <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-img">
                 {% else %}
@@ -172,6 +172,7 @@
     <div id="lightbox-info" class="lightbox-info">
         <h3 id="lightbox-title"></h3>
         <p id="lightbox-desc"></p>
+        <div id="lightbox-tags" class="project-tags" style="justify-content: center; margin-top: 15px;"></div>
     </div>
     <div class="lightbox-content-container">
         <button class="lightbox-prev" onclick="changeSlide(-1)">&#10094;</button>
