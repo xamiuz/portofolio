@@ -59,16 +59,26 @@ document.addEventListener("DOMContentLoaded", () => {
                     const filterValue = btn.getAttribute('data-filter');
                     
                     projectItems.forEach(item => {
+                        item.classList.remove('filter-show'); // Reset animation
+                        
+                        let shouldShow = false;
                         if (filterValue === 'all') {
-                            item.style.display = 'block';
+                            shouldShow = true;
                         } else {
                             const itemTags = item.getAttribute('data-tags') || "";
                             const tagsArray = itemTags.split(',').map(t => t.trim());
                             if (tagsArray.includes(filterValue)) {
-                                item.style.display = 'block';
-                            } else {
-                                item.style.display = 'none';
+                                shouldShow = true;
                             }
+                        }
+                        
+                        if (shouldShow) {
+                            item.style.display = 'block';
+                            // Trigger reflow to restart animation
+                            void item.offsetWidth;
+                            item.classList.add('filter-show');
+                        } else {
+                            item.style.display = 'none';
                         }
                     });
                 });

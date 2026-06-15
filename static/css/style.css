@@ -582,3 +582,12 @@ section {
     color: #fff;
 }
 
+
+@keyframes filterPop {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
+.filter-show {
+    animation: filterPop 0.4s ease forwards;
+}
+
