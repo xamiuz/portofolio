@@ -308,7 +308,7 @@ h1, h2, h3, h4, .logo {
 }
 
 /* CTA group */
-.cta-group { display: flex; flex-wrap: wrap; gap: 1rem; }
+.cta-group { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
 
 /* ============================================
    SECTIONS
