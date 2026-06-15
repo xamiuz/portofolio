@@ -136,7 +136,19 @@ AWS_SECRET_ACCESS_KEY = os.environ.get('SUPABASE_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('SUPABASE_BUCKET_NAME', 'portofolio')
 AWS_S3_ENDPOINT_URL = os.environ.get('SUPABASE_ENDPOINT_URL')
 AWS_S3_REGION_NAME = os.environ.get('SUPABASE_REGION', 'ap-southeast-1')
-AWS_S3_CUSTOM_DOMAIN = f"{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}" if AWS_S3_ENDPOINT_URL else None
+
+# Wajib untuk Supabase: Jangan gunakan nama bucket di URL (Path-style addressing)
+AWS_S3_ADDRESSING_STYLE = 'path'
+# Nonaktifkan ACL karena Supabase Storage mengaturnya via Dashboard Policies
+AWS_DEFAULT_ACL = None
+
+# Custom domain agar gambar bisa diakses dari browser dengan format yang benar
+if AWS_S3_ENDPOINT_URL:
+    # URL Publik gambar di Supabase: https://[ID].supabase.co/storage/v1/object/public/[BUCKET]
+    public_endpoint = AWS_S3_ENDPOINT_URL.replace('/s3', '/object/public')
+    AWS_S3_CUSTOM_DOMAIN = f"{public_endpoint.replace('https://', '')}/{AWS_STORAGE_BUCKET_NAME}"
+else:
+    AWS_S3_CUSTOM_DOMAIN = None
 
 STORAGES = {
     "default": {
