@@ -135,20 +135,12 @@ AWS_ACCESS_KEY_ID = os.environ.get('SUPABASE_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('SUPABASE_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('SUPABASE_BUCKET_NAME', 'portofolio')
 AWS_S3_ENDPOINT_URL = os.environ.get('SUPABASE_ENDPOINT_URL')
-# AWS_S3_REGION_NAME = os.environ.get('SUPABASE_REGION', 'ap-southeast-1') # Harus dimatikan agar signature Supabase cocok
 
-# Wajib untuk Supabase: Jangan gunakan nama bucket di URL (Path-style addressing)
+# Wajib untuk Supabase: path-style dan tanpa region agar signature cocok
 AWS_S3_ADDRESSING_STYLE = 'path'
-# Nonaktifkan ACL karena Supabase Storage mengaturnya via Dashboard Policies
 AWS_DEFAULT_ACL = None
-
-# Custom domain agar gambar bisa diakses dari browser dengan format yang benar
-if AWS_S3_ENDPOINT_URL:
-    # URL Publik gambar di Supabase: https://[ID].supabase.co/storage/v1/object/public/[BUCKET]
-    public_endpoint = AWS_S3_ENDPOINT_URL.replace('/s3', '/object/public')
-    AWS_S3_CUSTOM_DOMAIN = f"{public_endpoint.replace('https://', '')}/{AWS_STORAGE_BUCKET_NAME}"
-else:
-    AWS_S3_CUSTOM_DOMAIN = None
+# JANGAN set AWS_S3_CUSTOM_DOMAIN — ini akan membelokkan upload ke URL yang salah
+AWS_S3_CUSTOM_DOMAIN = None
 
 STORAGES = {
     "default": {
@@ -159,8 +151,11 @@ STORAGES = {
     },
 }
 
+# URL untuk menampilkan file media di browser (Supabase Public URL)
+_supabase_project_id = 'aitgjqvhzlxjtozrffqw'
+_supabase_bucket = AWS_STORAGE_BUCKET_NAME or 'portofolio'
 if AWS_ACCESS_KEY_ID:
-    MEDIA_URL = f'{AWS_S3_CUSTOM_DOMAIN}/'
+    MEDIA_URL = f'https://{_supabase_project_id}.supabase.co/storage/v1/object/public/{_supabase_bucket}/'
 else:
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
