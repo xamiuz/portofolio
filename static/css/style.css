@@ -25,6 +25,7 @@
     --glass-shadow-hover: 0 30px 80px rgba(0, 0, 0, 0.3);
     --orb-2: rgba(100, 60, 200, 0.15);
     --orb-3: rgba(245, 200, 66, 0.1);
+    --grid-line: rgba(255, 255, 255, 0.03);
     --radius: 14px;
     --transition-base: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -53,6 +54,7 @@ html[data-theme="light"] {
     --glass-shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.08);
     --orb-2: rgba(100, 60, 200, 0.06);
     --orb-3: rgba(245, 200, 66, 0.06);
+    --grid-line: rgba(0, 0, 0, 0.04);
 }
 
 /* ============================================
@@ -261,12 +263,13 @@ h1, h2, h3, h4, .logo {
     position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
     background-size: 80px 80px;
     mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
     -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
     pointer-events: none;
+    z-index: -1;
     animation: gridDrift 20s linear infinite;
 }
 
@@ -388,6 +391,19 @@ h1, h2, h3, h4, .logo {
     z-index: -2;
     overflow: hidden;
     pointer-events: none;
+}
+
+/* Subtle Grid Pattern */
+.bg-ornaments::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 100% 100% at 50% 0%, black 10%, transparent 80%);
+    opacity: 0.8;
 }
 
 .orb {
