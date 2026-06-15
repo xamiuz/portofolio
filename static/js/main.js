@@ -75,7 +75,7 @@ function updateLightboxContent() {
         if (videoUrl.includes('drive.google.com')) {
             // Ubah /view menjadi /preview
             videoUrl = videoUrl.replace(/\/view.*$/, '/preview');
-            contentDiv.innerHTML = `<iframe src="${videoUrl}" width="100%" height="80vh" style="border:0; border-radius:8px; min-width:600px; min-height:400px;" allow="autoplay"></iframe>`;
+            contentDiv.innerHTML = `<iframe src="${videoUrl}" style="width:100%; height:100%; border:0; border-radius:8px; box-shadow:0 10px 40px rgba(0,0,0,0.5);" allow="autoplay"></iframe>`;
         } 
         // Cek apakah YouTube
         else if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
@@ -85,7 +85,7 @@ function updateLightboxContent() {
             } else if (videoUrl.includes('youtu.be/')) {
                 videoId = videoUrl.split('youtu.be/')[1].split('?')[0];
             }
-            contentDiv.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" width="100%" height="80vh" style="border:0; border-radius:8px; min-width:600px; min-height:400px;" allow="autoplay; fullscreen"></iframe>`;
+            contentDiv.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" style="width:100%; height:100%; border:0; border-radius:8px; box-shadow:0 10px 40px rgba(0,0,0,0.5);" allow="autoplay; fullscreen"></iframe>`;
         }
         // Video MP4 lokal
         else {
