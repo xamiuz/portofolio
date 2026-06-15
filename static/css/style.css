@@ -328,8 +328,6 @@ section {
     text-align: center;
     position: relative;
     display: inline-block;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 .cinematic-section-title::after {
@@ -377,15 +375,36 @@ section {
 }
 
 .large-text {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     line-height: 1.9;
     color: var(--text-muted);
     margin-bottom: 3rem;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 /* ============================================
    REVEAL ANIMATIONS (Lightweight CSS only)
    ============================================ */
+/* Khusus Hero Animasi Teks */
+.hero-title-animate {
+    animation: heroTextReveal 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    opacity: 0;
+}
+
+@keyframes heroTextReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+        letter-spacing: 0px;
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0px);
+    }
+}
 .reveal {
     opacity: 0;
     transform: translateY(30px);
