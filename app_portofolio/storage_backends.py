@@ -13,9 +13,9 @@ class SupabaseStorage(Storage):
     """
 
     def __init__(self):
-        self.project_id = os.environ.get('SUPABASE_PROJECT_ID', 'aitgjqvhzlxjtozrffqw')
-        self.bucket = os.environ.get('SUPABASE_BUCKET_NAME', 'portofolio')
-        self.service_key = os.environ.get('SUPABASE_SERVICE_ROLE_KEY', '')
+        self.project_id = os.environ.get('SUPABASE_PROJECT_ID', 'aitgjqvhzlxjtozrffqw').strip()
+        self.bucket = os.environ.get('SUPABASE_BUCKET_NAME', 'portofolio').strip()
+        self.service_key = os.environ.get('SUPABASE_SERVICE_ROLE_KEY', '').strip()
         self.base_url = f"https://{self.project_id}.supabase.co/storage/v1"
         self.public_url = f"{self.base_url}/object/public/{self.bucket}"
 
