@@ -134,8 +134,20 @@
 <section id="projects" class="projects">
     <div class="section-header" style="margin-bottom: 2rem;">
         <h2 class="cinematic-section-title reveal">FEATURED <span class="accent">WORK</span></h2>
-        <div id="project-filters" class="project-filters reveal"></div>
+        {% comment %} <div id="project-filters" class="project-filters reveal"></div> {% endcomment %}
     </div>
+
+    <!-- Tampilan PDF Portofolio Sementara -->
+    <div class="pdf-container reveal zoom" style="width: 100%; max-width: 1000px; margin: 0 auto; height: 80vh; min-height: 600px; border-radius: var(--radius); overflow: hidden; box-shadow: var(--glass-shadow); border: 1px solid var(--glass-border);">
+        <object data="{% static 'docs/Portofolio_Pandu_Wirayuda.pdf' %}#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="100%">
+            <div style="padding: 2rem; text-align: center; color: var(--text);">
+                <p>Browser Anda tidak mendukung pratinjau PDF langsung.</p>
+                <a href="{% static 'docs/Portofolio_Pandu_Wirayuda.pdf' %}" target="_blank" class="btn-primary-bold" style="margin-top: 1rem;">Lihat Portofolio (PDF)</a>
+            </div>
+        </object>
+    </div>
+
+    {% comment %}
     <div class="masonry-grid">
         {% if projects %}
             {% for project in projects %}
@@ -165,6 +177,7 @@
             </div>
         {% endif %}
     </div>
+    {% endcomment %}
 </section>
 
 <!-- Lightbox Modal -->
