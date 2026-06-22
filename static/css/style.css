@@ -23,6 +23,7 @@
     --overlay-text: #fff;
     --glass-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
     --glass-shadow-hover: 0 30px 80px rgba(0, 0, 0, 0.3);
+    --nav-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
     --orb-2: rgba(100, 60, 200, 0.15);
     --orb-3: rgba(245, 200, 66, 0.1);
     --grid-line: rgba(255, 255, 255, 0.03);
@@ -31,30 +32,31 @@
 }
 
 html[data-theme="light"] {
-    --bg: #f8f9fa;
+    --bg: #f4f6f9;
     --bg-surface: #ffffff;
-    --text: #212529;
-    --text-muted: #495057;
-    --text-dim: #adb5bd;
-    --accent: #E50914; /* Tetap pertahankan merah sebagai accent */
-    --accent-soft: rgba(229, 9, 20, 0.1);
-    --accent-glow: rgba(229, 9, 20, 0.2);
+    --text: #1a1a24;
+    --text-muted: #5a5f70;
+    --text-dim: #8a8f9f;
+    --accent: #E50914;
+    --accent-soft: rgba(229, 9, 20, 0.05);
+    --accent-glow: rgba(229, 9, 20, 0.12);
     --gold: #d4af37;
-    --glass-bg: rgba(255, 255, 255, 0.85);
-    --glass-border: rgba(0, 0, 0, 0.08);
-    --glass-border-strong: rgba(0, 0, 0, 0.15);
-    --glass-dark-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(240, 240, 245, 0.95));
-    --project-img-bg: linear-gradient(135deg, #e9ecef, #dee2e6);
-    --title-gradient: linear-gradient(180deg, #1a1a24 0%, #495057 100%);
-    --logo-gradient: linear-gradient(90deg, #1a1a24 40%, var(--accent) 100%);
-    --subtitle-gradient: linear-gradient(90deg, #1a1a24, #495057);
-    --overlay-gradient: linear-gradient(to top, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.8) 60%, transparent 100%);
-    --overlay-text: #212529;
-    --glass-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-    --glass-shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.08);
-    --orb-2: rgba(100, 60, 200, 0.06);
-    --orb-3: rgba(245, 200, 66, 0.06);
-    --grid-line: rgba(0, 0, 0, 0.04);
+    --glass-bg: rgba(255, 255, 255, 0.45);
+    --glass-border: rgba(0, 0, 0, 0.05);
+    --glass-border-strong: rgba(0, 0, 0, 0.08);
+    --glass-dark-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.65), rgba(245, 246, 250, 0.85));
+    --project-img-bg: linear-gradient(135deg, #eef0f5, #e2e5ec);
+    --title-gradient: linear-gradient(135deg, #111116 0%, #4a4a58 100%);
+    --logo-gradient: linear-gradient(90deg, #111116 40%, var(--accent) 100%);
+    --subtitle-gradient: linear-gradient(90deg, #111116, #4a4a58);
+    --overlay-gradient: linear-gradient(to top, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.75) 60%, transparent 100%);
+    --overlay-text: #1a1a24;
+    --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.03);
+    --glass-shadow-hover: 0 30px 60px rgba(229, 9, 20, 0.06);
+    --nav-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    --orb-2: rgba(100, 60, 200, 0.03);
+    --orb-3: rgba(245, 200, 66, 0.02);
+    --grid-line: rgba(0, 0, 0, 0.02);
 }
 
 /* ============================================
@@ -84,8 +86,9 @@ body {
 
 html[data-theme="light"] body {
     background-image:
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(229, 9, 20, 0.05) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(100, 60, 200, 0.03) 0%, transparent 50%);
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(229, 9, 20, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(100, 60, 200, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 10% 30%, rgba(245, 200, 66, 0.02) 0%, transparent 40%);
 }
 
 /* Subtle grain overlay */
@@ -115,7 +118,7 @@ h1, h2, h3, h4, .logo {
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-bottom: 1px solid var(--glass-border);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+    box-shadow: var(--nav-shadow);
 }
 
 .glass-dark {
