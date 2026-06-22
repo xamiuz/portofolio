@@ -302,7 +302,7 @@ h1, h2, h3, h4, .logo {
     align-items: center;
     justify-content: center;
     z-index: 5;
-    padding-top: 4.5rem;
+    padding-top: 3.5rem;
 }
 
 .hero-interlock-grid {
@@ -353,7 +353,7 @@ h1, h2, h3, h4, .logo {
 }
 
 .hero-image-wrapper img {
-    height: clamp(380px, 60vh, 680px);
+    height: clamp(280px, 42vh, 480px);
     width: auto;
     display: block;
     object-fit: contain;
@@ -415,7 +415,7 @@ h1, h2, h3, h4, .logo {
 /* Responsivitas Mobile untuk Interlocking */
 @media (max-width: 768px) {
     .hero-interlock-wrapper {
-        padding-top: 3rem;
+        padding-top: 2.5rem;
     }
     .hero-interlock-grid {
         padding-top: 0;
@@ -701,7 +701,6 @@ section {
 /* Khusus Hero Animasi Teks */
 .hero-title-animate {
     animation: heroTextReveal 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    opacity: 0;
 }
 
 @keyframes heroTextReveal {
