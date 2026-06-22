@@ -419,13 +419,16 @@ h1, h2, h3, h4, .logo {
     }
     .hero-interlock-grid {
         padding-top: 0;
+        overflow: hidden;
+        width: 100%;
+        max-width: 100vw;
     }
     .hero-text-large {
-        font-size: clamp(2.3rem, 11vw, 6rem);
+        font-size: clamp(1.8rem, 9vw, 3rem);
         letter-spacing: -0.04em;
     }
     .hero-image-wrapper img {
-        height: clamp(220px, 40vh, 380px);
+        height: clamp(200px, 35vh, 320px);
     }
     .hero-glow-circle {
         width: 180px;
