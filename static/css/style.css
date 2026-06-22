@@ -716,6 +716,24 @@ section {
         filter: blur(0px);
     }
 }
+
+/* Khusus Hero Animasi Foto */
+.hero-image-animate {
+    animation: heroImageReveal 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+    opacity: 0;
+}
+
+@keyframes heroImageReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.94);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
 .reveal {
     opacity: 0;
     transform: translateY(30px);
