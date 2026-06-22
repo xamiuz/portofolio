@@ -1027,3 +1027,72 @@ section {
     max-width: 700px;
     margin: 0 auto;
 }
+
+/* ============================================
+   AESTHETIC HERO ENHANCEMENTS
+   ============================================ */
+.hero-glow-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(260px, 35vw, 420px);
+    height: clamp(260px, 35vw, 420px);
+    background: radial-gradient(circle, rgba(229, 9, 20, 0.4) 0%, rgba(229, 9, 20, 0.1) 40%, transparent 70%);
+    filter: blur(25px);
+    z-index: 2;
+    pointer-events: none;
+    border-radius: 50%;
+    animation: pulseGlow 5s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% { transform: translate(-50%, -50%) scale(0.92); opacity: 0.75; }
+    100% { transform: translate(-50%, -50%) scale(1.08); opacity: 0.95; }
+}
+
+.hero-tech-detail {
+    position: absolute;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    color: var(--text-dim);
+    z-index: 5;
+    user-select: none;
+    pointer-events: none;
+}
+
+.hero-tech-detail.left-detail {
+    left: 4%;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: left center;
+}
+
+.hero-tech-detail.right-detail {
+    right: 4%;
+    transform: translateY(-50%) rotate(90deg);
+    transform-origin: right center;
+    flex-direction: row-reverse;
+}
+
+.tech-line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--text-dim), transparent);
+    opacity: 0.4;
+}
+
+.hero-tech-detail.right-detail .tech-line {
+    background: linear-gradient(270deg, var(--text-dim), transparent);
+}
+
+/* responsive safety */
+@media (max-width: 1024px) {
+    .hero-tech-detail {
+        display: none !important;
+    }
+}
