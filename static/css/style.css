@@ -329,7 +329,7 @@ h1, h2, h3, h4, .logo {
 }
 
 .hero-image-wrapper img {
-    height: clamp(280px, 46vh, 500px);
+    height: clamp(380px, 60vh, 680px);
     width: auto;
     display: block;
     object-fit: contain;
@@ -398,7 +398,7 @@ h1, h2, h3, h4, .logo {
         letter-spacing: -0.04em;
     }
     .hero-image-wrapper img {
-        height: clamp(200px, 35vh, 320px);
+        height: clamp(260px, 45vh, 420px);
     }
     .hero-info-row {
         flex-direction: column;
