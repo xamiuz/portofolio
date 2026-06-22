@@ -24,6 +24,11 @@
     --glass-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
     --glass-shadow-hover: 0 30px 80px rgba(0, 0, 0, 0.3);
     --nav-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    --hero-text-solid-bg: var(--title-gradient);
+    --hero-text-outline-stroke: 1.5px var(--accent);
+    --hero-img-filter: drop-shadow(-10px 0 25px rgba(229,9,20,0.35)) drop-shadow(10px 0 25px rgba(0,0,0,0.8)) drop-shadow(0 30px 30px rgba(0,0,0,0.5));
+    --hero-glow-bg: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    --hero-outline-filter: drop-shadow(0 0 12px rgba(229, 9, 20, 0.4));
     --orb-2: rgba(100, 60, 200, 0.15);
     --orb-3: rgba(245, 200, 66, 0.1);
     --grid-line: rgba(255, 255, 255, 0.03);
@@ -54,6 +59,11 @@ html[data-theme="light"] {
     --glass-shadow: 0 20px 50px rgba(0, 0, 0, 0.03);
     --glass-shadow-hover: 0 30px 60px rgba(229, 9, 20, 0.06);
     --nav-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    --hero-text-solid-bg: linear-gradient(180deg, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.03) 100%);
+    --hero-text-outline-stroke: 1.5px var(--accent);
+    --hero-img-filter: drop-shadow(0 15px 25px rgba(0,0,0,0.07)) drop-shadow(0 4px 10px rgba(0,0,0,0.03));
+    --hero-glow-bg: radial-gradient(circle, rgba(229, 9, 20, 0.04) 0%, transparent 70%);
+    --hero-outline-filter: drop-shadow(0 0 4px rgba(229, 9, 20, 0.15));
     --orb-2: rgba(100, 60, 200, 0.03);
     --orb-3: rgba(245, 200, 66, 0.02);
     --grid-line: rgba(0, 0, 0, 0.02);
@@ -325,11 +335,11 @@ h1, h2, h3, h4, .logo {
 }
 
 .hero-text-solid {
-    background: var(--title-gradient);
+    background: var(--hero-text-solid-bg);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.15));
+    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.08));
     opacity: 0.95;
 }
 
@@ -347,7 +357,7 @@ h1, h2, h3, h4, .logo {
     width: auto;
     display: block;
     object-fit: contain;
-    filter: drop-shadow(-10px 0 25px rgba(229,9,20,0.35)) drop-shadow(10px 0 25px rgba(0,0,0,0.8)) drop-shadow(0 30px 30px rgba(0,0,0,0.5));
+    filter: var(--hero-img-filter);
     position: relative;
     z-index: 3;
 }
@@ -356,7 +366,7 @@ h1, h2, h3, h4, .logo {
     position: absolute;
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    background: var(--hero-glow-bg);
     border-radius: 50%;
     z-index: 1;
     opacity: 0.6;
@@ -366,8 +376,8 @@ h1, h2, h3, h4, .logo {
 .hero-text-outline {
     color: transparent;
     -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 1.5px var(--accent);
-    filter: drop-shadow(0 0 12px rgba(229, 9, 20, 0.4));
+    -webkit-text-stroke: var(--hero-text-outline-stroke);
+    filter: var(--hero-outline-filter);
     z-index: 4;
     pointer-events: none;
 }
