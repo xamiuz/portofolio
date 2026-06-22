@@ -281,6 +281,17 @@ h1, h2, h3, h4, .logo {
 /* ============================================
    3D INTERLOCKING HERO LAYOUT
    ============================================ */
+.hero-interlock-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    padding-top: 8rem;
+}
+
 .hero-interlock-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -390,22 +401,42 @@ h1, h2, h3, h4, .logo {
 
 /* Responsivitas Mobile untuk Interlocking */
 @media (max-width: 768px) {
+    .hero-interlock-wrapper {
+        padding-top: 4.5rem;
+    }
     .hero-interlock-grid {
-        padding-top: 1.5rem;
+        padding-top: 1rem;
     }
     .hero-text-large {
-        font-size: clamp(3rem, 13vw, 6.5rem);
+        font-size: clamp(2.3rem, 11vw, 6rem);
         letter-spacing: -0.04em;
     }
     .hero-image-wrapper img {
-        height: clamp(260px, 45vh, 420px);
+        height: clamp(220px, 40vh, 380px);
+    }
+    .hero-glow-circle {
+        width: 180px;
+        height: 180px;
     }
     .hero-info-row {
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.4rem;
         align-items: center;
         text-align: center;
-        margin-bottom: 1.5rem;
+        margin-top: 0.2rem;
+        margin-bottom: 1rem;
+        padding-top: 0.8rem;
+    }
+    .hero-info-name {
+        font-size: 0.95rem;
+    }
+    .hero-info-role {
+        font-size: 0.8rem;
+    }
+    .cinematic-description {
+        font-size: 0.85rem !important;
+        line-height: 1.6;
+        margin-bottom: 1rem;
     }
 }
 
