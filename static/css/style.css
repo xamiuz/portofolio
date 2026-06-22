@@ -289,7 +289,7 @@ h1, h2, h3, h4, .logo {
     align-items: center;
     justify-content: center;
     z-index: 5;
-    padding-top: 8rem;
+    padding-top: 4.5rem;
 }
 
 .hero-interlock-grid {
@@ -302,7 +302,7 @@ h1, h2, h3, h4, .logo {
     max-width: 1300px;
     margin: 0 auto;
     position: relative;
-    padding-top: 3rem;
+    padding-top: 0.5rem;
 }
 
 .hero-grid-item {
@@ -402,10 +402,10 @@ h1, h2, h3, h4, .logo {
 /* Responsivitas Mobile untuk Interlocking */
 @media (max-width: 768px) {
     .hero-interlock-wrapper {
-        padding-top: 4.5rem;
+        padding-top: 3rem;
     }
     .hero-interlock-grid {
-        padding-top: 1rem;
+        padding-top: 0;
     }
     .hero-text-large {
         font-size: clamp(2.3rem, 11vw, 6rem);
