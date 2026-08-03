@@ -144,7 +144,7 @@
     <div class="masonry-grid">
         {% if awards %}
             {% for award in awards %}
-            <div class="masonry-item glass-dark hover-zoom reveal zoom">
+            <div class="masonry-item glass-dark hover-zoom reveal zoom" onclick="openLightbox(this)" data-title="{{ award.title }}" data-desc="{{ award.description }}" data-tags="{% if award.date %}{{ award.date }}{% endif %}" data-media='[{% if award.image %}{"url": "{{ award.image.url }}", "type": "image"}{% endif %}]' style="cursor: pointer;">
                 {% if award.image %}
                     <img src="{{ award.image.url }}" alt="{{ award.title }}" class="project-img" style="object-fit: contain; background: #111;">
                 {% else %}

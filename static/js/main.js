@@ -158,15 +158,13 @@ let currentTags = [];
 
 function openLightbox(element) {
     const rawData = element.getAttribute('data-media');
-    if (!rawData) return;
     
     currentTitle = element.getAttribute('data-title') || "";
     currentDesc = element.getAttribute('data-desc') || "";
     const rawTags = element.getAttribute('data-tags');
     currentTags = rawTags ? rawTags.split(',') : [];
     
-    currentMediaList = JSON.parse(rawData);
-    if (currentMediaList.length === 0) return;
+    currentMediaList = rawData ? JSON.parse(rawData) : [];
 
     currentMediaIndex = 0;
     document.getElementById('lightbox').style.display = "block";
@@ -179,6 +177,7 @@ function closeLightbox() {
 }
 
 function changeSlide(n) {
+    if (currentMediaList.length === 0) return;
     currentMediaIndex += n;
     if (currentMediaIndex >= currentMediaList.length) {
         currentMediaIndex = 0;
@@ -190,56 +189,64 @@ function changeSlide(n) {
 }
 
 function updateLightboxContent() {
-    const media = currentMediaList[currentMediaIndex];
     const contentDiv = document.getElementById('lightbox-content');
     const indicatorsDiv = document.getElementById('lightbox-indicators');
-    
-    // Build content
-    if (media.type === 'video') {
-        let videoUrl = media.url;
-        
-        // Cek apakah ini link Google Drive
-        if (videoUrl.includes('drive.google.com')) {
-            // Ubah /view menjadi /preview
-            videoUrl = videoUrl.replace(/\/view.*$/, '/preview');
-            contentDiv.innerHTML = `<iframe src="${videoUrl}" style="width:100%; height:100%; border:0; border-radius:8px; box-shadow:0 10px 40px rgba(0,0,0,0.5);" allow="autoplay"></iframe>`;
-        } 
-        // Cek apakah YouTube
-        else if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
-            let videoId = "";
-            if (videoUrl.includes('youtube.com/watch?v=')) {
-                videoId = videoUrl.split('v=')[1].split('&')[0];
-            } else if (videoUrl.includes('youtu.be/')) {
-                videoId = videoUrl.split('youtu.be/')[1].split('?')[0];
-            }
-            contentDiv.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" style="width:100%; height:100%; border:0; border-radius:8px; box-shadow:0 10px 40px rgba(0,0,0,0.5);" allow="autoplay; fullscreen"></iframe>`;
-        }
-        // Video MP4 lokal
-        else {
-            contentDiv.innerHTML = `<video src="${videoUrl}" controls autoplay></video>`;
-        }
-    } else {
-        contentDiv.innerHTML = `<img src="${media.url}" alt="Project Media">`;
-    }
-
-    // Hide arrows if only 1 item
     const prevBtn = document.querySelector('.lightbox-prev');
     const nextBtn = document.querySelector('.lightbox-next');
-    if (currentMediaList.length <= 1) {
+    
+    if (currentMediaList.length > 0) {
+        const media = currentMediaList[currentMediaIndex];
+        
+        // Build content
+        if (media.type === 'video') {
+            let videoUrl = media.url;
+            
+            // Cek apakah ini link Google Drive
+            if (videoUrl.includes('drive.google.com')) {
+                // Ubah /view menjadi /preview
+                videoUrl = videoUrl.replace(/\/view.*$/, '/preview');
+                contentDiv.innerHTML = `<iframe src="${videoUrl}" style="width:100%; height:100%; border:0; border-radius:8px; box-shadow:0 10px 40px rgba(0,0,0,0.5);" allow="autoplay"></iframe>`;
+            } 
+            // Cek apakah YouTube
+            else if (videoUrl.includes('youtube.com') || videoUrl.includes('youtu.be')) {
+                let videoId = "";
+                if (videoUrl.includes('youtube.com/watch?v=')) {
+                    videoId = videoUrl.split('v=')[1].split('&')[0];
+                } else if (videoUrl.includes('youtu.be/')) {
+                    videoId = videoUrl.split('youtu.be/')[1].split('?')[0];
+                }
+                contentDiv.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" style="width:100%; height:100%; border:0; border-radius:8px; box-shadow:0 10px 40px rgba(0,0,0,0.5);" allow="autoplay; fullscreen"></iframe>`;
+            }
+            // Video MP4 lokal
+            else {
+                contentDiv.innerHTML = `<video src="${videoUrl}" controls autoplay></video>`;
+            }
+        } else {
+            contentDiv.innerHTML = `<img src="${media.url}" alt="Project Media">`;
+        }
+
+        // Hide arrows if only 1 item
+        if (currentMediaList.length <= 1) {
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+        } else {
+            prevBtn.style.display = 'block';
+            nextBtn.style.display = 'block';
+        }
+
+        // Build indicators
+        let indicatorsHtml = "";
+        for (let i = 0; i < currentMediaList.length; i++) {
+            let activeClass = (i === currentMediaIndex) ? "active" : "";
+            indicatorsHtml += `<span class="lightbox-indicator ${activeClass}" onclick="currentMediaIndex = ${i}; updateLightboxContent();"></span>`;
+        }
+        indicatorsDiv.innerHTML = indicatorsHtml;
+    } else {
+        contentDiv.innerHTML = "";
         prevBtn.style.display = 'none';
         nextBtn.style.display = 'none';
-    } else {
-        prevBtn.style.display = 'block';
-        nextBtn.style.display = 'block';
+        indicatorsDiv.innerHTML = "";
     }
-
-    // Build indicators
-    let indicatorsHtml = "";
-    for (let i = 0; i < currentMediaList.length; i++) {
-        let activeClass = (i === currentMediaIndex) ? "active" : "";
-        indicatorsHtml += `<span class="lightbox-indicator ${activeClass}" onclick="currentMediaIndex = ${i}; updateLightboxContent();"></span>`;
-    }
-    indicatorsDiv.innerHTML = indicatorsHtml;
     
     // Update title, desc, dan tags
     const titleEl = document.getElementById('lightbox-title');
