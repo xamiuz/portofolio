@@ -716,11 +716,11 @@ section {
     }
     
     /* Hide internal scrollbar completely */
-    body.fp-enabled section.scrollable-internal::-webkit-scrollbar {
+    body.fp-enabled .scrollable-internal::-webkit-scrollbar {
         width: 0px;
         display: none;
     }
-    body.fp-enabled section.scrollable-internal {
+    body.fp-enabled .scrollable-internal {
         overflow-y: auto;
         scrollbar-width: none;
         -ms-overflow-style: none;
@@ -783,6 +783,7 @@ section {
     padding: 4rem;
     text-align: center;
     position: relative;
+    max-height: 85vh;
 }
 
 /* Glowing corner accents */
