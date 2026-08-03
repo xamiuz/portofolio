@@ -336,6 +336,10 @@ document.addEventListener("DOMContentLoaded", () => {
             title.classList.remove('shine-text');
             void title.offsetWidth; // trigger reflow
             title.classList.add('shine-text');
+            
+            setTimeout(() => {
+                title.classList.remove('shine-text');
+            }, 1500);
         }
     }
 

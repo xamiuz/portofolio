@@ -1441,7 +1441,7 @@ section {
 
 /* Shine Text Animation */
 .shine-text {
-    background: linear-gradient(90deg, var(--text-color) 0%, rgba(255,255,255,1) 20%, var(--accent) 40%, var(--text-color) 60%);
+    background: linear-gradient(90deg, var(--text) 0%, rgba(255,255,255,1) 20%, var(--accent) 40%, var(--text) 60%);
     background-size: 200% auto;
     color: transparent;
     -webkit-background-clip: text;
