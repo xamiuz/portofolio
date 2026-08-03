@@ -275,35 +275,78 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentSectionIndex = 0;
     let isScrolling = false;
     
+    // Circular Progress UI
+    const progressCircle = document.querySelector('.progress-ring__circle');
+    const radius = progressCircle ? progressCircle.r.baseVal.value : 0;
+    const circumference = radius * 2 * Math.PI;
+    
+    if (progressCircle) {
+        progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+        progressCircle.style.strokeDashoffset = circumference;
+    }
+
+    function setProgress(percent) {
+        if (!progressCircle) return;
+        const offset = circumference - percent / 100 * circumference;
+        progressCircle.style.strokeDashoffset = offset;
+    }
+
+    const circProgressBtn = document.getElementById('circular-progress');
+    if (circProgressBtn) {
+        circProgressBtn.addEventListener('click', () => {
+            if (window.innerWidth >= 992) {
+                if (currentSectionIndex > 0 && !isScrolling) {
+                    scrollToSection(0); // go back to top
+                }
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    }
+    
     function initFullPageScroll() {
         if (window.innerWidth >= 992) {
             document.body.classList.add('fp-enabled');
-            // update index based on current scroll position
-            let closestIndex = 0;
-            let minDiff = Infinity;
             sections.forEach((sec, idx) => {
-                const rect = sec.getBoundingClientRect();
-                if (Math.abs(rect.top) < minDiff) {
-                    minDiff = Math.abs(rect.top);
-                    closestIndex = idx;
-                }
+                sec.className = sec.className.replace(/fp-anim-[a-z-]+/g, '').trim();
+                sec.classList.remove('fp-active');
+                sec.style.transform = '';
             });
-            currentSectionIndex = closestIndex;
-            const fpWrapper = document.getElementById('fp-wrapper');
-            if (fpWrapper) {
-                fpWrapper.style.transform = `translateY(-${currentSectionIndex * 100}vh)`;
-            }
+            sections[currentSectionIndex].classList.add('fp-active');
+            updateProgress();
+            triggerShine(currentSectionIndex);
         } else {
             document.body.classList.remove('fp-enabled');
-            const fpWrapper = document.getElementById('fp-wrapper');
-            if (fpWrapper) {
-                fpWrapper.style.transform = 'none';
-            }
+            sections.forEach(sec => sec.style.transform = '');
         }
     }
 
     initFullPageScroll();
     window.addEventListener('resize', initFullPageScroll);
+
+    function updateProgress() {
+        const percent = (currentSectionIndex / (sections.length - 1)) * 100;
+        setProgress(percent);
+    }
+
+    function triggerShine(index) {
+        const section = sections[index];
+        const title = section.querySelector('.cinematic-section-title');
+        if (title) {
+            title.classList.remove('shine-text');
+            void title.offsetWidth; // trigger reflow
+            title.classList.add('shine-text');
+        }
+    }
+
+    // Define transition sequence
+    const transitions = [
+        { out: 'fp-anim-out-up', in: 'fp-anim-in-up', downOut: 'fp-anim-out-down', downIn: 'fp-anim-in-down' },
+        { out: 'fp-anim-out-zoom', in: 'fp-anim-in-zoom', downOut: 'fp-anim-out-zoom', downIn: 'fp-anim-in-zoom' },
+        { out: 'fp-anim-out-left', in: 'fp-anim-in-right', downOut: 'fp-anim-out-right', downIn: 'fp-anim-in-left' },
+        { out: 'fp-anim-out-up', in: 'fp-anim-in-up', downOut: 'fp-anim-out-down', downIn: 'fp-anim-in-down' },
+        { out: 'fp-anim-out-zoom', in: 'fp-anim-in-zoom', downOut: 'fp-anim-out-zoom', downIn: 'fp-anim-in-zoom' },
+    ];
 
     window.addEventListener('wheel', (e) => {
         if (window.innerWidth < 992) return;
@@ -326,28 +369,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (e.deltaY > 0) {
             if (currentSectionIndex < sections.length - 1) {
-                currentSectionIndex++;
-                scrollToSection(currentSectionIndex);
+                scrollToSection(currentSectionIndex + 1);
             }
         } else if (e.deltaY < 0) {
             if (currentSectionIndex > 0) {
-                currentSectionIndex--;
-                scrollToSection(currentSectionIndex);
+                scrollToSection(currentSectionIndex - 1);
             }
         }
     }, { passive: false });
 
-    function scrollToSection(index) {
+    function scrollToSection(newIndex) {
+        if (newIndex === currentSectionIndex) return;
         isScrolling = true;
         
-        const fpWrapper = document.getElementById('fp-wrapper');
-        if (fpWrapper) {
-            fpWrapper.style.transform = `translateY(-${index * 100}vh)`;
-        }
+        const currentSec = sections[currentSectionIndex];
+        const nextSec = sections[newIndex];
+        const isScrollingDown = newIndex > currentSectionIndex;
+        
+        // Use transition defined by the lower index
+        const transIdx = Math.min(currentSectionIndex, newIndex) % transitions.length;
+        const trans = transitions[transIdx];
+        
+        // Determine classes based on direction
+        let outClass = isScrollingDown ? trans.out : trans.downOut;
+        let inClass = isScrollingDown ? trans.in : trans.downIn;
+        
+        // Reset classes
+        sections.forEach(sec => sec.className = sec.className.replace(/fp-anim-[a-z-]+/g, '').trim());
+        
+        // Setup incoming section
+        nextSec.classList.add(inClass);
+        
+        // Force reflow
+        void nextSec.offsetWidth;
+        
+        // Apply active and transition out
+        currentSec.classList.add(outClass);
+        currentSec.classList.remove('fp-active');
+        
+        nextSec.classList.add('fp-active');
+        nextSec.classList.remove(inClass);
+        
+        currentSectionIndex = newIndex;
+        updateProgress();
+        triggerShine(currentSectionIndex);
         
         setTimeout(() => {
             isScrolling = false;
-        }, 1000); // Cooldown matches the CSS transition time
+        }, 1000); // matches CSS transition time
     }
     
     document.querySelectorAll('.nav-links a, .cta-group a').forEach(link => {
@@ -357,8 +426,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const targetIndex = sections.findIndex(sec => sec.id === targetId);
             if (targetIndex !== -1) {
                 e.preventDefault();
-                currentSectionIndex = targetIndex;
-                scrollToSection(currentSectionIndex);
+                scrollToSection(targetIndex);
             }
         });
     });

@@ -129,6 +129,19 @@
         <div id="lightbox-indicators" class="lightbox-indicators"></div>
     </div>
 
+    <!-- Circular Progress Indicator -->
+    <div id="circular-progress" class="circular-progress" title="Back to top">
+        <svg class="progress-ring" width="50" height="50">
+            <circle class="progress-ring__bg" stroke="rgba(255,255,255,0.1)" stroke-width="4" fill="transparent" r="22" cx="25" cy="25"/>
+            <circle class="progress-ring__circle" stroke="var(--accent)" stroke-width="4" fill="transparent" r="22" cx="25" cy="25"/>
+        </svg>
+        <div class="progress-arrow">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="{% static 'js/main.js' %}"></script>
 </body>
