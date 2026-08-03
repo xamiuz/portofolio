@@ -332,13 +332,40 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, { passive: false });
 
+    // Custom easing function for smooth scrolling
+    function easeInOutCubic(t, b, c, d) {
+        t /= d/2;
+        if (t < 1) return c/2*t*t*t + b;
+        t -= 2;
+        return c/2*(t*t*t + 2) + b;
+    }
+
     function scrollToSection(index) {
         isScrolling = true;
-        sections[index].scrollIntoView({ behavior: 'smooth' });
         
-        setTimeout(() => {
-            isScrolling = false;
-        }, 800); // Cooldown for the transition
+        const targetSection = sections[index];
+        const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition - startPosition;
+        const duration = 1000; // 1 second transition
+        let startTime = null;
+
+        function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
+            
+            window.scrollTo(0, run);
+            
+            if (timeElapsed < duration) {
+                requestAnimationFrame(animation);
+            } else {
+                window.scrollTo(0, targetPosition);
+                isScrolling = false;
+            }
+        }
+
+        requestAnimationFrame(animation);
     }
     
     document.querySelectorAll('.nav-links a, .cta-group a').forEach(link => {
