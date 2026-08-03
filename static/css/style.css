@@ -616,15 +616,23 @@ h1, h2, h3, h4, .logo {
 /* ============================================
    BACKGROUND ORNAMENTS
    ============================================ */
-.bg-ornaments {
+.bg-layer {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: -10vh;
+    left: -10vw;
+    width: 120vw;
+    height: 120vh;
     z-index: -2;
     overflow: hidden;
     pointer-events: none;
+    transition: transform 1s cubic-bezier(0.86, 0, 0.07, 1);
+    will-change: transform;
+}
+
+.bg-ornaments {
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 /* Subtle Grid Pattern */
@@ -644,8 +652,8 @@ h1, h2, h3, h4, .logo {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     z-index: -1;
     pointer-events: auto; /* Allow mouse interaction */
 }

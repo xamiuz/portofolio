@@ -351,6 +351,16 @@ document.addEventListener("DOMContentLoaded", () => {
         { out: 'fp-anim-out-up', in: 'fp-anim-in-up', downOut: 'fp-anim-out-down', downIn: 'fp-anim-in-down' },
         { out: 'fp-anim-out-zoom', in: 'fp-anim-in-zoom', downOut: 'fp-anim-out-zoom', downIn: 'fp-anim-in-zoom' },
     ];
+    
+    // Define background transforms mapped to section index for synchronization
+    const bgTransforms = [
+        'translate(0, 0) scale(1)',                     // 0: Hero
+        'translate(0, -5%) scale(1)',                   // 1: About
+        'translate(0, -5%) scale(1.1)',                 // 2: Education
+        'translate(-5%, -5%) scale(1.1)',               // 3: Experience
+        'translate(-5%, -10%) scale(1.1)',              // 4: Awards
+        'translate(-5%, -10%) scale(1.15)',             // 5: Projects
+    ];
 
     window.addEventListener('wheel', (e) => {
         if (window.innerWidth < 992) return;
@@ -417,6 +427,12 @@ document.addEventListener("DOMContentLoaded", () => {
         currentSectionIndex = newIndex;
         updateProgress();
         
+        // Sync background transition
+        const bgLayer = document.getElementById('bg-layer');
+        if (bgLayer && window.innerWidth >= 992) {
+            bgLayer.style.transform = bgTransforms[currentSectionIndex % bgTransforms.length];
+        }
+        
         if (isScrollingDown) {
             triggerShine(currentSectionIndex);
         }
@@ -447,8 +463,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const ctx = canvas.getContext('2d');
     let particlesArray = [];
     
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // Canvas covers 120vw / 120vh of bg-layer
+    canvas.width = window.innerWidth * 1.2;
+    canvas.height = window.innerHeight * 1.2;
     
     let mouse = {
         x: null,
@@ -475,8 +492,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth * 1.2;
+        canvas.height = window.innerHeight * 1.2;
         mouse.radius = ((canvas.height/8) * (canvas.width/8));
         initParticles();
     });
