@@ -61,6 +61,7 @@
         </ul>
     </nav>
 
+    <div id="fp-wrapper">
     <main>
         {% block content %}{% endblock %}
     </main>
@@ -110,6 +111,23 @@
             </div>
         </div>
     </footer>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <div id="lightbox-info" class="lightbox-info">
+            <h3 id="lightbox-title"></h3>
+            <p id="lightbox-desc"></p>
+            <div id="lightbox-tags" class="project-tags" style="justify-content: center; margin-top: 15px;"></div>
+        </div>
+        <div class="lightbox-content-container">
+            <button class="lightbox-prev" onclick="changeSlide(-1)">&#10094;</button>
+            <div id="lightbox-content" class="lightbox-content"></div>
+            <button class="lightbox-next" onclick="changeSlide(1)">&#10095;</button>
+        </div>
+        <div id="lightbox-indicators" class="lightbox-indicators"></div>
+    </div>
 
     <!-- Scripts -->
     <script src="{% static 'js/main.js' %}"></script>
