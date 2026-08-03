@@ -371,6 +371,7 @@ h1, h2, h3, h4, .logo {
     text-align: center;
     user-select: none;
     white-space: nowrap;
+    margin-top: 0.7em;
 }
 
 .hero-text-solid {
