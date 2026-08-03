@@ -706,8 +706,7 @@ section {
     padding: 3.5rem 6%;
 }
 
-/* Full-Page Stacked Scroll Styles (Desktop Only) */
-@media (min-width: 992px) {
+/* Full-Page Stacked Scroll Styles (All Devices) */
     body.fp-enabled { overflow: hidden; }
     body.fp-enabled::-webkit-scrollbar { display: none; }
     body.fp-enabled { -ms-overflow-style: none; scrollbar-width: none; }
@@ -765,7 +764,6 @@ section {
     .fp-anim-in-left { transform: translateX(100%); }
     .fp-anim-in-right { transform: translateX(-100%); }
     .fp-anim-in-zoom { transform: scale(0.8); }
-}
 
 .section-header {
     text-align: center;

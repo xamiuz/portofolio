@@ -267,7 +267,7 @@ function updateLightboxContent() {
     }
 }
 
-// === Full-Page Scroll Logic (Desktop Only) ===
+// === Full-Page Scroll Logic (All Devices) ===
 document.addEventListener("DOMContentLoaded", () => {
     const sections = Array.from(document.querySelectorAll('section, footer'));
     if (sections.length === 0) return;
@@ -294,31 +294,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const circProgressBtn = document.getElementById('circular-progress');
     if (circProgressBtn) {
         circProgressBtn.addEventListener('click', () => {
-            if (window.innerWidth >= 992) {
-                if (currentSectionIndex > 0 && !isScrolling) {
-                    scrollToSection(0); // go back to top
-                }
-            } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (currentSectionIndex > 0 && !isScrolling) {
+                scrollToSection(0); // go back to top
             }
         });
     }
     
     function initFullPageScroll() {
-        if (window.innerWidth >= 992) {
-            document.body.classList.add('fp-enabled');
-            sections.forEach((sec, idx) => {
-                sec.className = sec.className.replace(/fp-anim-[a-z-]+/g, '').trim();
-                sec.classList.remove('fp-active');
-                sec.style.transform = '';
-            });
-            sections[currentSectionIndex].classList.add('fp-active');
-            updateProgress();
-            triggerShine(currentSectionIndex);
-        } else {
-            document.body.classList.remove('fp-enabled');
-            sections.forEach(sec => sec.style.transform = '');
-        }
+        document.body.classList.add('fp-enabled');
+        sections.forEach((sec, idx) => {
+            sec.className = sec.className.replace(/fp-anim-[a-z-]+/g, '').trim();
+            sec.classList.remove('fp-active');
+            sec.style.transform = '';
+        });
+        sections[currentSectionIndex].classList.add('fp-active');
+        updateProgress();
+        triggerShine(currentSectionIndex);
     }
 
     initFullPageScroll();
@@ -363,7 +354,6 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     window.addEventListener('wheel', (e) => {
-        if (window.innerWidth < 992) return;
         
         const lightbox = document.getElementById('lightbox');
         if (lightbox && lightbox.style.display === 'flex') return;
@@ -391,6 +381,48 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     }, { passive: false });
+
+    // --- Touch Swipe Support for Mobile ---
+    let touchStartY = 0;
+    let touchEndY = 0;
+    const swipeThreshold = 40;
+
+    window.addEventListener('touchstart', e => {
+        touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    window.addEventListener('touchend', e => {
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe(e);
+    }, { passive: false }); // false if we ever needed preventDefault, but we do passive logic
+
+    function handleSwipe(e) {
+        if (isScrolling) return;
+        
+        const lightbox = document.getElementById('lightbox');
+        if (lightbox && lightbox.style.display === 'flex') return;
+
+        const scrollableDiv = e.target.closest('.scrollable-internal');
+        if (scrollableDiv) {
+            const isAtTop = scrollableDiv.scrollTop === 0;
+            const isAtBottom = Math.abs(scrollableDiv.scrollHeight - scrollableDiv.clientHeight - scrollableDiv.scrollTop) <= 2;
+            
+            if (touchStartY - touchEndY > swipeThreshold && !isAtBottom) return;
+            if (touchEndY - touchStartY > swipeThreshold && !isAtTop) return;
+        }
+
+        if (touchStartY - touchEndY > swipeThreshold) {
+            // Swipe Up -> Next Section
+            if (currentSectionIndex < sections.length - 1) {
+                scrollToSection(currentSectionIndex + 1);
+            }
+        } else if (touchEndY - touchStartY > swipeThreshold) {
+            // Swipe Down -> Prev Section
+            if (currentSectionIndex > 0) {
+                scrollToSection(currentSectionIndex - 1);
+            }
+        }
+    }
 
     function scrollToSection(newIndex) {
         if (newIndex === currentSectionIndex) return;
@@ -429,7 +461,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Sync background transition
         const bgLayer = document.getElementById('bg-layer');
-        if (bgLayer && window.innerWidth >= 992) {
+        if (bgLayer) {
             bgLayer.style.transform = bgTransforms[currentSectionIndex % bgTransforms.length];
         }
         
@@ -444,7 +476,6 @@ document.addEventListener("DOMContentLoaded", () => {
     
     document.querySelectorAll('.nav-links a, .cta-group a').forEach(link => {
         link.addEventListener('click', (e) => {
-            if (window.innerWidth < 992) return;
             const targetId = link.getAttribute('href').substring(1);
             const targetIndex = sections.findIndex(sec => sec.id === targetId);
             if (targetIndex !== -1) {
