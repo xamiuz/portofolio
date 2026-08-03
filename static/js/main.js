@@ -416,7 +416,10 @@ document.addEventListener("DOMContentLoaded", () => {
         
         currentSectionIndex = newIndex;
         updateProgress();
-        triggerShine(currentSectionIndex);
+        
+        if (isScrollingDown) {
+            triggerShine(currentSectionIndex);
+        }
         
         setTimeout(() => {
             isScrolling = false;
