@@ -266,3 +266,91 @@ function updateLightboxContent() {
         tagsEl.innerHTML = tagsHtml;
     }
 }
+
+// === Full-Page Scroll Logic (Desktop Only) ===
+document.addEventListener("DOMContentLoaded", () => {
+    const sections = Array.from(document.querySelectorAll('section, footer'));
+    if (sections.length === 0) return;
+
+    let currentSectionIndex = 0;
+    let isScrolling = false;
+    
+    function initFullPageScroll() {
+        if (window.innerWidth >= 992) {
+            document.body.classList.add('fp-enabled');
+            // update index based on current scroll position
+            let closestIndex = 0;
+            let minDiff = Infinity;
+            sections.forEach((sec, idx) => {
+                const rect = sec.getBoundingClientRect();
+                if (Math.abs(rect.top) < minDiff) {
+                    minDiff = Math.abs(rect.top);
+                    closestIndex = idx;
+                }
+            });
+            currentSectionIndex = closestIndex;
+            if (minDiff > 5) {
+                sections[currentSectionIndex].scrollIntoView({ behavior: 'auto' });
+            }
+        } else {
+            document.body.classList.remove('fp-enabled');
+        }
+    }
+
+    initFullPageScroll();
+    window.addEventListener('resize', initFullPageScroll);
+
+    window.addEventListener('wheel', (e) => {
+        if (window.innerWidth < 992) return;
+        
+        const lightbox = document.getElementById('lightbox');
+        if (lightbox && lightbox.style.display === 'flex') return;
+
+        const scrollableDiv = e.target.closest('.scrollable-internal');
+        if (scrollableDiv) {
+            const isAtTop = scrollableDiv.scrollTop === 0;
+            const isAtBottom = Math.abs(scrollableDiv.scrollHeight - scrollableDiv.clientHeight - scrollableDiv.scrollTop) <= 2;
+            
+            if (e.deltaY > 0 && !isAtBottom) return;
+            if (e.deltaY < 0 && !isAtTop) return;
+        }
+
+        e.preventDefault(); 
+        
+        if (isScrolling) return;
+
+        if (e.deltaY > 0) {
+            if (currentSectionIndex < sections.length - 1) {
+                currentSectionIndex++;
+                scrollToSection(currentSectionIndex);
+            }
+        } else if (e.deltaY < 0) {
+            if (currentSectionIndex > 0) {
+                currentSectionIndex--;
+                scrollToSection(currentSectionIndex);
+            }
+        }
+    }, { passive: false });
+
+    function scrollToSection(index) {
+        isScrolling = true;
+        sections[index].scrollIntoView({ behavior: 'smooth' });
+        
+        setTimeout(() => {
+            isScrolling = false;
+        }, 800); // Cooldown for the transition
+    }
+    
+    document.querySelectorAll('.nav-links a, .cta-group a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            if (window.innerWidth < 992) return;
+            const targetId = link.getAttribute('href').substring(1);
+            const targetIndex = sections.findIndex(sec => sec.id === targetId);
+            if (targetIndex !== -1) {
+                e.preventDefault();
+                currentSectionIndex = targetIndex;
+                scrollToSection(currentSectionIndex);
+            }
+        });
+    });
+});

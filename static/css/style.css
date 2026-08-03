@@ -82,7 +82,6 @@ html {
     scroll-behavior: smooth;
     overflow-x: hidden;
     width: 100vw;
-    scroll-snap-type: y mandatory;
 }
 
 body {
@@ -687,8 +686,37 @@ h1, h2, h3, h4, .logo {
    ============================================ */
 section {
     padding: 3.5rem 6%;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
+}
+
+/* Full-Page Scroll Styles (Desktop Only) */
+@media (min-width: 992px) {
+    body.fp-enabled {
+        overflow: hidden;
+    }
+    body.fp-enabled::-webkit-scrollbar {
+        display: none;
+    }
+    body.fp-enabled {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    body.fp-enabled section, body.fp-enabled footer {
+        height: 100vh;
+        overflow: hidden;
+    }
+    body.fp-enabled section.scrollable-internal {
+        overflow-y: auto;
+    }
+    body.fp-enabled section.scrollable-internal::-webkit-scrollbar {
+        width: 8px;
+    }
+    body.fp-enabled section.scrollable-internal::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+    }
+    body.fp-enabled section.scrollable-internal::-webkit-scrollbar-thumb {
+        background: var(--accent);
+        border-radius: 4px;
+    }
 }
 
 .section-header {
