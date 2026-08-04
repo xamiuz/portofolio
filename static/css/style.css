@@ -311,26 +311,6 @@ h1, h2, h3, h4, .logo {
     overflow: hidden;
 }
 
-/* Animated background grid */
-.cinematic-hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(var(--grid-line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-    background-size: 150px 150px;
-    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
-    pointer-events: none;
-    z-index: -1;
-    animation: gridDrift 20s linear infinite;
-}
-
-@keyframes gridDrift {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(80px, 80px); }
-}
 
 /* ============================================
    3D INTERLOCKING HERO LAYOUT
