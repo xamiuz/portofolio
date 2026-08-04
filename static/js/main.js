@@ -334,14 +334,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Define transition sequence
-    const transitions = [
-        { out: 'fp-anim-out-up', in: 'fp-anim-in-up', downOut: 'fp-anim-out-down', downIn: 'fp-anim-in-down' },
-        { out: 'fp-anim-out-zoom', in: 'fp-anim-in-zoom', downOut: 'fp-anim-out-zoom', downIn: 'fp-anim-in-zoom' },
-        { out: 'fp-anim-out-left', in: 'fp-anim-in-right', downOut: 'fp-anim-out-right', downIn: 'fp-anim-in-left' },
-        { out: 'fp-anim-out-up', in: 'fp-anim-in-up', downOut: 'fp-anim-out-down', downIn: 'fp-anim-in-down' },
-        { out: 'fp-anim-out-zoom', in: 'fp-anim-in-zoom', downOut: 'fp-anim-out-zoom', downIn: 'fp-anim-in-zoom' },
-    ];
+    // Unified 3D Warp Sequence for a continuous tunnel journey
+    const transitions = Array(sections.length).fill({ 
+        out: 'fp-anim-out-warp-forward', 
+        in: 'fp-anim-in-warp-forward', 
+        downOut: 'fp-anim-out-warp-back', 
+        downIn: 'fp-anim-in-warp-back' 
+    });
     
     window.addEventListener('wheel', (e) => {
         
