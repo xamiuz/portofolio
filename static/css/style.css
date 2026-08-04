@@ -31,7 +31,7 @@
     --hero-outline-filter: drop-shadow(0 0 12px rgba(229, 9, 20, 0.4));
     --orb-2: rgba(100, 60, 200, 0.15);
     --orb-3: rgba(245, 200, 66, 0.1);
-    --grid-line: rgba(255, 255, 255, 0.07);
+    --grid-line: rgba(255, 255, 255, 0.25);
     --radius: 14px;
     --transition-base: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -659,7 +659,8 @@ h1, h2, h3, h4, .logo {
         linear-gradient(var(--grid-line) 1px, transparent 1px),
         linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
     background-size: 80px 80px;
-    opacity: 0.8;
+    opacity: 1;
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
 }
 
 .wall-top, .wall-bottom {
@@ -673,15 +674,15 @@ h1, h2, h3, h4, .logo {
 .wall-top {
     top: -100vh;
     transform: rotateX(-80deg) translateZ(40vh);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
+    mask-image: linear-gradient(to bottom, transparent 10%, black 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 10%, black 100%);
 }
 
 .wall-bottom {
     top: 50vh;
     transform: rotateX(80deg) translateZ(40vh);
-    mask-image: linear-gradient(to top, transparent 0%, black 80%);
-    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 80%);
+    mask-image: linear-gradient(to top, transparent 10%, black 100%);
+    -webkit-mask-image: linear-gradient(to top, transparent 10%, black 100%);
 }
 
 @keyframes tunnelMove {
