@@ -32,6 +32,7 @@
     --orb-2: rgba(100, 60, 200, 0.15);
     --orb-3: rgba(245, 200, 66, 0.1);
     --grid-line: rgba(255, 255, 255, 0.25);
+    --grid-line-width: 2px;
     --radius: 14px;
     --transition-base: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -66,7 +67,8 @@ html[data-theme="light"] {
     --hero-outline-filter: drop-shadow(0 0 4px rgba(229, 9, 20, 0.15));
     --orb-2: rgba(100, 60, 200, 0.03);
     --orb-3: rgba(245, 200, 66, 0.02);
-    --grid-line: rgba(0, 0, 0, 0.25);
+    --grid-line: rgba(0, 0, 0, 0.45);
+    --grid-line-width: 2px;
 }
 
 /* ============================================
@@ -661,8 +663,8 @@ h1, h2, h3, h4, .logo {
 .tunnel-wall {
     position: absolute;
     background-image: 
-        linear-gradient(var(--grid-line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+        linear-gradient(var(--grid-line) var(--grid-line-width, 2px), transparent var(--grid-line-width, 2px)),
+        linear-gradient(90deg, var(--grid-line) var(--grid-line-width, 2px), transparent var(--grid-line-width, 2px));
     background-size: 80px 80px;
     opacity: 1;
     transform: translateZ(0); /* Hardware acceleration */
