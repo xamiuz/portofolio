@@ -650,28 +650,15 @@ h1, h2, h3, h4, .logo {
     transform: translateZ(0); /* Hardware acceleration */
 }
 
-.wall-top, .wall-bottom {
-    width: 200vw;
-    height: 300vh; /* Deep perspective */
-    left: -50vw;
-    animation: tunnelMove 4s linear infinite;
+.wall-full {
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    animation: tunnelMove 10s linear infinite;
     opacity: 1;
-}
-
-.wall-top {
-    bottom: 50vh; /* Rests exactly on the horizon */
-    transform-origin: bottom center;
-    transform: rotateX(-80deg);
-    mask-image: linear-gradient(to top, transparent 0%, black 80%);
-    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 80%);
-}
-
-.wall-bottom {
-    top: 50vh; /* Rests exactly on the horizon */
-    transform-origin: top center;
-    transform: rotateX(80deg);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
 }
 
 @keyframes tunnelMove {
