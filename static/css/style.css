@@ -649,9 +649,14 @@ h1, h2, h3, h4, .logo {
     z-index: -1;
 }
 
-.tunnel-container.warp-active {
-    transform: scale(2.5) rotateZ(15deg); /* Barrel roll jump effect */
-}
+/* Dynamic Background Grid Warps */
+.tunnel-container.warp-forward { transform: scale(2.5) translateZ(0); }
+.tunnel-container.warp-roll-right { transform: scale(2.5) rotateZ(15deg) translateZ(0); }
+.tunnel-container.warp-roll-left { transform: scale(2.5) rotateZ(-15deg) translateZ(0); }
+.tunnel-container.warp-dive { transform: scale(2.5) translateY(-20vh) rotateX(10deg) translateZ(0); }
+.tunnel-container.warp-climb { transform: scale(2.5) translateY(20vh) rotateX(-10deg) translateZ(0); }
+.tunnel-container.warp-dodge-left { transform: scale(2.5) translateX(20vw) rotateY(-10deg) translateZ(0); }
+.tunnel-container.warp-dodge-right { transform: scale(2.5) translateX(-20vw) rotateY(10deg) translateZ(0); }
 
 .tunnel-wall {
     position: absolute;

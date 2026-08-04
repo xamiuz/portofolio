@@ -336,11 +336,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Varied 3D Warp Sequence (directions combined with Z-depth so it feels connected)
     const transitions = [
-        { out: 'fp-anim-out-warp-forward', in: 'fp-anim-in-up', downOut: 'fp-anim-out-down', downIn: 'fp-anim-in-warp-back' }, // 1: Hero to About (Dive in)
-        { out: 'fp-anim-out-left', in: 'fp-anim-in-right', downOut: 'fp-anim-out-right', downIn: 'fp-anim-in-left' }, // 2: About to Education (Dodge left)
-        { out: 'fp-anim-out-up', in: 'fp-anim-in-up', downOut: 'fp-anim-out-down', downIn: 'fp-anim-in-down' }, // 3: Education to Experience (Fly up)
-        { out: 'fp-anim-out-zoom', in: 'fp-anim-in-warp-forward', downOut: 'fp-anim-out-warp-back', downIn: 'fp-anim-in-zoom' }, // 4: Experience to Projects (Warp)
-        { out: 'fp-anim-out-warp-forward', in: 'fp-anim-in-warp-forward', downOut: 'fp-anim-out-warp-back', downIn: 'fp-anim-in-warp-back' }, // 5: Projects to Contact (Straight Warp)
+        { out: 'fp-anim-out-warp-forward', in: 'fp-anim-in-up', downOut: 'fp-anim-out-down', downIn: 'fp-anim-in-warp-back', bgWarp: 'warp-dive', bgWarpRev: 'warp-climb' }, // 1: Hero to About (Dive in)
+        { out: 'fp-anim-out-left', in: 'fp-anim-in-right', downOut: 'fp-anim-out-right', downIn: 'fp-anim-in-left', bgWarp: 'warp-dodge-left', bgWarpRev: 'warp-dodge-right' }, // 2: About to Education (Dodge left)
+        { out: 'fp-anim-out-up', in: 'fp-anim-in-up', downOut: 'fp-anim-out-down', downIn: 'fp-anim-in-down', bgWarp: 'warp-climb', bgWarpRev: 'warp-dive' }, // 3: Education to Experience (Fly up)
+        { out: 'fp-anim-out-zoom', in: 'fp-anim-in-warp-forward', downOut: 'fp-anim-out-warp-back', downIn: 'fp-anim-in-zoom', bgWarp: 'warp-roll-right', bgWarpRev: 'warp-roll-left' }, // 4: Experience to Projects (Warp)
+        { out: 'fp-anim-out-warp-forward', in: 'fp-anim-in-warp-forward', downOut: 'fp-anim-out-warp-back', downIn: 'fp-anim-in-warp-back', bgWarp: 'warp-forward', bgWarpRev: 'warp-forward' }, // 5: Projects to Contact (Straight Warp)
     ];
     
     window.addEventListener('wheel', (e) => {
@@ -449,12 +449,15 @@ document.addEventListener("DOMContentLoaded", () => {
         currentSectionIndex = newIndex;
         updateProgress();
         
-        // Sync 3D tunnel transition
+        // Sync 3D tunnel transition dynamically
         const tunnelContainer = document.getElementById('tunnel-container');
         if (tunnelContainer) {
-            tunnelContainer.classList.add('warp-active');
+            let warpClass = isScrollingDown ? trans.bgWarp : trans.bgWarpRev;
+            if (!warpClass) warpClass = 'warp-forward'; // Fallback
+            
+            tunnelContainer.classList.add(warpClass);
             setTimeout(() => {
-                tunnelContainer.classList.remove('warp-active');
+                tunnelContainer.classList.remove(warpClass);
             }, 1000); // Reset after jump completes
         }
         
