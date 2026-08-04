@@ -635,23 +635,81 @@ h1, h2, h3, h4, .logo {
     height: 100%;
 }
 
-/* Subtle Grid Pattern */
-.bg-ornaments::after {
-    content: '';
+/* 3D Perspective Tunnel */
+.tunnel-container {
+    perspective: 500px;
+    width: 100vw;
+    height: 100vh;
     position: absolute;
     inset: 0;
-    background-image:
-        linear-gradient(var(--grid-line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 150% 150% at 50% 50%, black 10%, transparent 80%);
-    opacity: 1;
-    animation: panGrid 40s linear infinite;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+    transform: scale(1);
+    z-index: -1;
 }
 
-@keyframes panGrid {
+.tunnel-container.warp-active {
+    transform: scale(2.5); /* Warp speed jump effect */
+}
+
+.tunnel-wall {
+    position: absolute;
+    background-image: 
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.8;
+}
+
+.wall-top, .wall-bottom {
+    width: 200vw;
+    height: 300vh;
+    left: -50vw;
+    top: -100vh;
+    animation: tunnelMove 3s linear infinite;
+}
+
+.wall-top {
+    transform: rotateX(-90deg) translateZ(40vh);
+}
+
+.wall-bottom {
+    transform: rotateX(90deg) translateZ(40vh);
+}
+
+.wall-left, .wall-right {
+    width: 300vh; /* Depth */
+    height: 200vh; /* Vertical span */
+    left: -150vh;
+    top: -50vh;
+    animation: tunnelMoveSide 3s linear infinite;
+}
+
+.wall-left {
+    transform: rotateY(90deg) translateZ(40vw);
+}
+
+.wall-right {
+    transform: rotateY(-90deg) translateZ(40vw);
+}
+
+@keyframes tunnelMove {
     0% { background-position: 0 0; }
-    100% { background-position: 60px 60px; }
+    100% { background-position: 0 80px; }
+}
+
+@keyframes tunnelMoveSide {
+    0% { background-position: 0 0; }
+    100% { background-position: 80px 0; }
+}
+
+.tunnel-center-light {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 0%, var(--bg) 60%);
+    z-index: 1;
+    pointer-events: none;
 }
 
 

@@ -343,16 +343,6 @@ document.addEventListener("DOMContentLoaded", () => {
         { out: 'fp-anim-out-zoom', in: 'fp-anim-in-zoom', downOut: 'fp-anim-out-zoom', downIn: 'fp-anim-in-zoom' },
     ];
     
-    // Define background transforms mapped to section index for synchronization
-    const bgTransforms = [
-        'translate(0, 0) scale(1)',                     // 0: Hero
-        'translate(0, -5%) scale(1)',                   // 1: About
-        'translate(0, -5%) scale(1.1)',                 // 2: Education
-        'translate(-5%, -5%) scale(1.1)',               // 3: Experience
-        'translate(-5%, -10%) scale(1.1)',              // 4: Awards
-        'translate(-5%, -10%) scale(1.15)',             // 5: Projects
-    ];
-
     window.addEventListener('wheel', (e) => {
         
         const lightbox = document.getElementById('lightbox');
@@ -459,10 +449,13 @@ document.addEventListener("DOMContentLoaded", () => {
         currentSectionIndex = newIndex;
         updateProgress();
         
-        // Sync background transition
-        const bgLayer = document.getElementById('bg-layer');
-        if (bgLayer) {
-            bgLayer.style.transform = bgTransforms[currentSectionIndex % bgTransforms.length];
+        // Sync 3D tunnel transition
+        const tunnelContainer = document.getElementById('tunnel-container');
+        if (tunnelContainer) {
+            tunnelContainer.classList.add('warp-active');
+            setTimeout(() => {
+                tunnelContainer.classList.remove('warp-active');
+            }, 1000); // Reset after jump completes
         }
         
         if (isScrollingDown) {
