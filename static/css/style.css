@@ -776,8 +776,8 @@ h1, h2, h3, h4, .logo {
     .cinematic-about {
         min-height: auto !important;
     }
-    /* Scrollable-internal should not restrict on mobile */
-    .scrollable-internal {
+    /* Scrollable-internal should not restrict on mobile, EXCEPT for the PDF viewer */
+    .scrollable-internal:not(#pdf-mobile-viewer) {
         max-height: none !important;
         overflow: visible !important;
     }
