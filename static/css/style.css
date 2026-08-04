@@ -735,7 +735,8 @@ h1, h2, h3, h4, .logo {
     .glass, .glass-dark, .navbar, .lightbox-content {
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
-        background: rgba(10, 10, 15, 0.98) !important; /* Solid fallback */
+        background: var(--bg-surface) !important;
+        color: var(--text) !important;
     }
     /* FORCE NATIVE SMOOTH SCROLLING FOR MOBILE */
     body {
@@ -1226,17 +1227,18 @@ section {
         left: 0;
         width: 100%;
         flex-direction: column;
-        background: rgba(13, 13, 18, 0.95);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        background: var(--bg-surface) !important;
         padding: 2rem 5%;
         gap: 1.5rem;
         border-top: 1px solid var(--glass-border);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         opacity: 0;
         visibility: hidden;
         transform: translateY(-10px);
         transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    .nav-links a {
+        color: var(--text) !important;
     }
     .nav-links.active {
         opacity: 1;
