@@ -550,19 +550,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
             if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
             
-            // Interaction
-            let dx = mouse.x - this.x;
-            let dy = mouse.y - this.y;
-            let distance = Math.sqrt(dx*dx + dy*dy);
-            
-            // Move away from mouse slightly
-            if (distance < mouse.radius + this.size) {
-                if (mouse.x < this.x && this.x < canvas.width - this.size * 10) this.x += 1;
-                if (mouse.x > this.x && this.x > this.size * 10) this.x -= 1;
-                if (mouse.y < this.y && this.y < canvas.height - this.size * 10) this.y += 1;
-                if (mouse.y > this.y && this.y > this.size * 10) this.y -= 1;
-            }
-            
             this.x += this.directionX * 0.7; // Speed factor
             this.y += this.directionY * 0.7;
             this.draw();
