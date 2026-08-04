@@ -664,53 +664,29 @@ h1, h2, h3, h4, .logo {
 
 .wall-top, .wall-bottom {
     width: 200vw;
-    height: 300vh;
+    height: 150vh;
     left: -50vw;
-    top: -100vh;
-    animation: tunnelMove 3s linear infinite;
+    animation: tunnelMove 4s linear infinite;
+    opacity: 1;
 }
 
 .wall-top {
-    transform: rotateX(-90deg) translateZ(40vh);
+    top: -100vh;
+    transform: rotateX(-80deg) translateZ(40vh);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
 }
 
 .wall-bottom {
-    transform: rotateX(90deg) translateZ(40vh);
-}
-
-.wall-left, .wall-right {
-    width: 300vh; /* Depth */
-    height: 200vh; /* Vertical span */
-    left: -150vh;
-    top: -50vh;
-    animation: tunnelMoveSide 3s linear infinite;
-}
-
-.wall-left {
-    transform: rotateY(90deg) translateZ(40vw);
-}
-
-.wall-right {
-    transform: rotateY(-90deg) translateZ(40vw);
+    top: 50vh;
+    transform: rotateX(80deg) translateZ(40vh);
+    mask-image: linear-gradient(to top, transparent 0%, black 80%);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 80%);
 }
 
 @keyframes tunnelMove {
     0% { background-position: 0 0; }
     100% { background-position: 0 80px; }
-}
-
-@keyframes tunnelMoveSide {
-    0% { background-position: 0 0; }
-    100% { background-position: 80px 0; }
-}
-
-.tunnel-center-light {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at center, transparent 0%, var(--bg) 60%);
-    z-index: 1;
-    pointer-events: none;
-    transition: all 1s ease-in;
 }
 
 
