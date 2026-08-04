@@ -502,14 +502,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 1000); // Reset after jump completes
         }
         
-        // Switch grid pattern per section
-        const gridPatterns = ['grid-square', 'grid-dots', 'grid-diamond', 'grid-lines', 'grid-crosshatch', 'grid-hex'];
-        const wallFull = document.querySelector('.wall-full');
-        if (wallFull) {
-            const patternClass = gridPatterns[newIndex % gridPatterns.length];
-            wallFull.classList.remove(...gridPatterns);
-            wallFull.classList.add(patternClass);
-        }
         
         if (isScrollingDown) {
             triggerShine(currentSectionIndex);
