@@ -886,25 +886,7 @@ section {
 }
 
 /* Glowing corner accents */
-.about-container::before, .about-container::after {
-    content: '';
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    border-radius: 4px;
-}
-.about-container::before {
-    top: -1px; left: -1px;
-    border-top: 2px solid var(--accent);
-    border-left: 2px solid var(--accent);
-    box-shadow: -4px -4px 20px var(--accent-glow);
-}
-.about-container::after {
-    bottom: -1px; right: -1px;
-    border-bottom: 2px solid var(--accent);
-    border-right: 2px solid var(--accent);
-    box-shadow: 4px 4px 20px var(--accent-glow);
-}
+/* Removed red corner boxes */
 
 .large-text {
     font-size: 1.05rem;
