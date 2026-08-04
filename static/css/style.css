@@ -697,6 +697,38 @@ h1, h2, h3, h4, .logo {
     100% { background-position: 0 80px; }
 }
 
+/* --- Mobile Performance Optimizations --- */
+@media (max-width: 768px) {
+    .tunnel-container {
+        perspective: none;
+    }
+    .wall-top {
+        display: none; /* Only use one flat grid on mobile */
+    }
+    .wall-bottom {
+        top: -50vh !important;
+        left: -50vw !important;
+        width: 200vw !important;
+        height: 200vh !important;
+        transform: none !important;
+        mask-image: radial-gradient(circle at center, black 0%, transparent 70%) !important;
+        -webkit-mask-image: radial-gradient(circle at center, black 0%, transparent 70%) !important;
+        opacity: 0.3 !important; /* Dimmer for mobile clarity */
+        animation: tunnelMove 8s linear infinite !important; /* Slower, cheaper animation */
+    }
+    
+    /* Simplify dynamic background warps to a cheap 2D zoom for mobile */
+    .tunnel-container.warp-forward,
+    .tunnel-container.warp-roll-right,
+    .tunnel-container.warp-roll-left,
+    .tunnel-container.warp-dive,
+    .tunnel-container.warp-climb,
+    .tunnel-container.warp-dodge-left,
+    .tunnel-container.warp-dodge-right {
+        transform: scale(1.3) translateZ(0) !important;
+    }
+}
+
 
 
 .orb {
