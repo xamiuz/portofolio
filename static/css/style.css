@@ -641,12 +641,9 @@ h1, h2, h3, h4, .logo {
 
 .tunnel-wall {
     position: absolute;
-    background-image: 
-        linear-gradient(var(--grid-line) var(--grid-line-width, 2px), transparent var(--grid-line-width, 2px)),
-        linear-gradient(90deg, var(--grid-line) var(--grid-line-width, 2px), transparent var(--grid-line-width, 2px));
-    background-size: 150px 150px;
     opacity: 1;
-    transform: translateZ(0); /* Hardware acceleration */
+    transform: translateZ(0);
+    transition: background-image 0.6s ease, background-size 0.6s ease;
 }
 
 .wall-full {
@@ -654,15 +651,87 @@ h1, h2, h3, h4, .logo {
     height: 120vh;
     left: 0;
     top: 0;
-    animation: tunnelMove 10s linear infinite;
     opacity: 1;
     mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 30%, transparent 100%);
     -webkit-mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 30%, transparent 100%);
 }
 
-@keyframes tunnelMove {
+/* === GRID PATTERN VARIANTS === */
+
+/* Pattern 0: Classic Square Grid (default) */
+.wall-full.grid-square, .wall-full:not([class*="grid-"]) {
+    background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 120px 120px;
+    animation: gridDriftSquare 12s linear infinite;
+}
+@keyframes gridDriftSquare {
     0% { background-position: 0 0; }
-    100% { background-position: 0 150px; }
+    100% { background-position: 120px 120px; }
+}
+
+/* Pattern 1: Dot Matrix */
+.wall-full.grid-dots {
+    background-image: radial-gradient(circle, var(--grid-line) 1.5px, transparent 1.5px);
+    background-size: 50px 50px;
+    animation: gridDriftDots 8s linear infinite;
+}
+@keyframes gridDriftDots {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 50px; }
+}
+
+/* Pattern 2: Diamond / Diagonal Grid */
+.wall-full.grid-diamond {
+    background-image:
+        linear-gradient(45deg, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(-45deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 80px 80px;
+    animation: gridDriftDiamond 10s linear infinite;
+}
+@keyframes gridDriftDiamond {
+    0% { background-position: 0 0; }
+    100% { background-position: 80px 0; }
+}
+
+/* Pattern 3: Horizontal Scan Lines */
+.wall-full.grid-lines {
+    background-image: linear-gradient(var(--grid-line) 1px, transparent 1px);
+    background-size: 100% 40px;
+    animation: gridDriftLines 6s linear infinite;
+}
+@keyframes gridDriftLines {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 40px; }
+}
+
+/* Pattern 4: Crosshatch (fine dense pattern) */
+.wall-full.grid-crosshatch {
+    background-image:
+        linear-gradient(30deg, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(150deg, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(270deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridDriftCrosshatch 14s linear infinite;
+}
+@keyframes gridDriftCrosshatch {
+    0% { background-position: 0 0; }
+    100% { background-position: 60px 60px; }
+}
+
+/* Pattern 5: Hex-inspired (large sparse grid + offset dots) */
+.wall-full.grid-hex {
+    background-image:
+        radial-gradient(circle, var(--grid-line) 2px, transparent 2px),
+        linear-gradient(60deg, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(-60deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 100px 100px;
+    animation: gridDriftHex 16s linear infinite;
+}
+@keyframes gridDriftHex {
+    0% { background-position: 0 0; }
+    100% { background-position: 100px 100px; }
 }
 
 /* --- Mobile Performance Optimizations --- */
@@ -670,19 +739,8 @@ h1, h2, h3, h4, .logo {
     .tunnel-container {
         perspective: none;
     }
-    .wall-top {
-        display: none; /* Only use one flat grid on mobile */
-    }
-    .wall-bottom {
-        top: -50vh !important;
-        left: -50vw !important;
-        width: 200vw !important;
-        height: 200vh !important;
-        transform: none !important;
-        mask-image: radial-gradient(circle at center, black 0%, transparent 70%) !important;
-        -webkit-mask-image: radial-gradient(circle at center, black 0%, transparent 70%) !important;
+    .wall-full {
         opacity: 0.3 !important; /* Dimmer for mobile clarity */
-        animation: tunnelMove 8s linear infinite !important; /* Slower, cheaper animation */
     }
     
     /* Simplify dynamic background warps to a cheap 2D zoom for mobile */
