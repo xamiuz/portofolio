@@ -356,13 +356,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Varied 3D Warp Sequence (directions combined with Z-depth so it feels connected)
+    // Creative transition sequence — each section change feels unique and dramatic
     const transitions = [
-        { out: 'fp-anim-out-warp-forward', in: 'fp-anim-in-up', downOut: 'fp-anim-out-down', downIn: 'fp-anim-in-warp-back', bgWarp: 'warp-dive', bgWarpRev: 'warp-climb' }, // 1: Hero to About (Dive in)
-        { out: 'fp-anim-out-left', in: 'fp-anim-in-right', downOut: 'fp-anim-out-right', downIn: 'fp-anim-in-left', bgWarp: 'warp-dodge-left', bgWarpRev: 'warp-dodge-right' }, // 2: About to Education (Dodge left)
-        { out: 'fp-anim-out-up', in: 'fp-anim-in-up', downOut: 'fp-anim-out-down', downIn: 'fp-anim-in-down', bgWarp: 'warp-climb', bgWarpRev: 'warp-dive' }, // 3: Education to Experience (Fly up)
-        { out: 'fp-anim-out-zoom', in: 'fp-anim-in-warp-forward', downOut: 'fp-anim-out-warp-back', downIn: 'fp-anim-in-zoom', bgWarp: 'warp-roll-right', bgWarpRev: 'warp-roll-left' }, // 4: Experience to Projects (Warp)
-        { out: 'fp-anim-out-warp-forward', in: 'fp-anim-in-warp-forward', downOut: 'fp-anim-out-warp-back', downIn: 'fp-anim-in-warp-back', bgWarp: 'warp-forward', bgWarpRev: 'warp-forward' }, // 5: Projects to Contact (Straight Warp)
+        // 1: Hero → About — Shatter out, rise from depth
+        { out: 'fp-anim-out-shatter', in: 'fp-anim-in-rise', downOut: 'fp-anim-out-down', downIn: 'fp-anim-in-blackout', bgWarp: 'warp-dive', bgWarpRev: 'warp-climb' },
+        // 2: About → Education — Glitch distortion
+        { out: 'fp-anim-out-glitch', in: 'fp-anim-in-glitch', downOut: 'fp-anim-out-right', downIn: 'fp-anim-in-left', bgWarp: 'warp-dodge-left', bgWarpRev: 'warp-dodge-right' },
+        // 3: Education → Experience — 3D Page flip
+        { out: 'fp-anim-out-flip', in: 'fp-anim-in-flip', downOut: 'fp-anim-out-flip', downIn: 'fp-anim-in-flip', bgWarp: 'warp-roll-right', bgWarpRev: 'warp-roll-left' },
+        // 4: Experience → Projects — Barrel roll
+        { out: 'fp-anim-out-barrel', in: 'fp-anim-in-drop', downOut: 'fp-anim-out-vortex', downIn: 'fp-anim-in-vortex', bgWarp: 'warp-climb', bgWarpRev: 'warp-dive' },
+        // 5: Projects → Certificates — Vortex spiral
+        { out: 'fp-anim-out-vortex', in: 'fp-anim-in-vortex', downOut: 'fp-anim-out-zoom', downIn: 'fp-anim-in-zoom', bgWarp: 'warp-forward', bgWarpRev: 'warp-forward' },
+        // 6: Certificates → Contact — Blackout flash
+        { out: 'fp-anim-out-blackout', in: 'fp-anim-in-blackout', downOut: 'fp-anim-out-shatter', downIn: 'fp-anim-in-rise', bgWarp: 'warp-dodge-right', bgWarpRev: 'warp-dodge-left' },
     ];
     
     window.addEventListener('wheel', (e) => {
@@ -509,7 +516,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         setTimeout(() => {
             isScrolling = false;
-        }, 1000); // matches CSS transition time
+        }, 1200); // matches CSS transition time
     }
     
     document.querySelectorAll('.nav-links a, .cta-group a').forEach(link => {

@@ -860,8 +860,8 @@ section {
         opacity: 0;
         visibility: hidden;
         z-index: 1;
-        transition: all 1s cubic-bezier(0.86, 0, 0.07, 1);
-        will-change: transform, opacity;
+        transition: all 1.2s cubic-bezier(0.86, 0, 0.07, 1);
+        will-change: transform, opacity, filter;
     }
     
     /* Hide internal scrollbar completely */
@@ -884,26 +884,109 @@ section {
         filter: blur(0) !important;
     }
 
-    /* Outgoing Transitions (Applied to old slide) */
-    /* Outgoing Transitions (Leaving the screen optimized) */
+    /* ======= OUTGOING TRANSITIONS (Old section leaving) ======= */
+
+    /* Shatter / Explode Out — scales up + rotates + blurs away */
+    .fp-anim-out-shatter {
+        transform: scale(2.5) rotate(8deg) translateZ(200px);
+        opacity: 0;
+        filter: blur(15px);
+    }
+
+    /* Glitch Distort Out — skews violently + color shift */
+    .fp-anim-out-glitch {
+        transform: skewX(-20deg) skewY(5deg) scale(1.3) translateX(-30vw);
+        opacity: 0;
+        filter: hue-rotate(90deg) saturate(3) blur(4px);
+    }
+
+    /* 3D Page Flip Out — flips like turning a book page */
+    .fp-anim-out-flip {
+        transform: perspective(1200px) rotateY(-90deg) scale(0.8);
+        transform-origin: left center;
+        opacity: 0;
+    }
+
+    /* Spiral Vortex Out — spins into a vortex */
+    .fp-anim-out-vortex {
+        transform: rotate(180deg) scale(0) translateZ(-300px);
+        opacity: 0;
+        filter: blur(10px);
+    }
+
+    /* Barrel Roll Out — full rotation with depth */
+    .fp-anim-out-barrel {
+        transform: perspective(800px) rotateX(90deg) translateY(-50vh) scale(0.5);
+        transform-origin: center top;
+        opacity: 0;
+    }
+
+    /* Blackout Flash Out — zooms slightly then snaps to black */
+    .fp-anim-out-blackout {
+        transform: scale(1.1);
+        opacity: 0;
+        filter: brightness(3) blur(8px);
+    }
+
+    /* Classic directional outs (kept for reverse) */
     .fp-anim-out-up { transform: translateY(-100vh) scale(1.5) translateZ(50px); opacity: 0; }
     .fp-anim-out-down { transform: translateY(100vh) scale(0.5) translateZ(-50px); opacity: 0; }
-    .fp-anim-out-left { transform: translateX(-100vw) scale(1.5) translateZ(50px) rotateY(-20deg); opacity: 0; }
-    .fp-anim-out-right { transform: translateX(100vw) scale(0.5) translateZ(-50px) rotateY(20deg); opacity: 0; }
-    .fp-anim-out-zoom { transform: scale(1.5) translateZ(50px); opacity: 0; }
-    
-    /* Unified 3D Warp Transitions (Optimized) */
+    .fp-anim-out-left { transform: translateX(-100vw) scale(1.5) rotateY(-20deg); opacity: 0; }
+    .fp-anim-out-right { transform: translateX(100vw) scale(0.5) rotateY(20deg); opacity: 0; }
+    .fp-anim-out-zoom { transform: scale(2) translateZ(100px); opacity: 0; filter: blur(6px); }
     .fp-anim-out-warp-forward { transform: scale(3) translateZ(100px); opacity: 0; }
     .fp-anim-out-warp-back { transform: scale(0.5) translateZ(-100px); opacity: 0; }
 
-    /* Incoming Transitions (Optimized) */
+    /* ======= INCOMING TRANSITIONS (New section entering) ======= */
+
+    /* Rise from Depth — emerges from far away */
+    .fp-anim-in-rise {
+        transform: scale(0.3) translateY(60vh) translateZ(-200px);
+        opacity: 0;
+        filter: blur(12px);
+    }
+
+    /* Glitch Materialize In — glitches into existence */
+    .fp-anim-in-glitch {
+        transform: skewX(20deg) skewY(-5deg) scale(0.7) translateX(30vw);
+        opacity: 0;
+        filter: hue-rotate(-90deg) saturate(3) blur(4px);
+    }
+
+    /* 3D Page Flip In — flips in from the right like a page */
+    .fp-anim-in-flip {
+        transform: perspective(1200px) rotateY(90deg) scale(0.8);
+        transform-origin: right center;
+        opacity: 0;
+    }
+
+    /* Vortex Materialize In — spins into frame */
+    .fp-anim-in-vortex {
+        transform: rotate(-180deg) scale(0) translateZ(-300px);
+        opacity: 0;
+        filter: blur(10px);
+    }
+
+    /* Drop From Above In — falls from ceiling */
+    .fp-anim-in-drop {
+        transform: perspective(800px) rotateX(-90deg) translateY(50vh) scale(0.5);
+        transform-origin: center bottom;
+        opacity: 0;
+    }
+
+    /* Blackout Flash In — fades from bright white flash */
+    .fp-anim-in-blackout {
+        transform: scale(0.95);
+        opacity: 0;
+        filter: brightness(3) blur(8px);
+    }
+
+    /* Classic directional ins (kept for reverse) */
     .fp-anim-in-up { transform: translateY(100vh) scale(0.5) translateZ(-50px); opacity: 0; }
     .fp-anim-in-down { transform: translateY(-100vh) scale(1.5) translateZ(50px); opacity: 0; }
-    .fp-anim-in-left { transform: translateX(100vw) scale(0.5) translateZ(-50px) rotateY(20deg); opacity: 0; }
-    .fp-anim-in-right { transform: translateX(-100vw) scale(1.5) translateZ(50px) rotateY(-20deg); opacity: 0; }
+    .fp-anim-in-left { transform: translateX(100vw) scale(0.5) rotateY(20deg); opacity: 0; }
+    .fp-anim-in-right { transform: translateX(-100vw) scale(1.5) rotateY(-20deg); opacity: 0; }
     .fp-anim-in-zoom { transform: scale(0.5) translateZ(-50px); opacity: 0; }
-    
-    /* Initial state for incoming warp sections */
     .fp-anim-in-warp-forward { transform: scale(0.5) translateZ(-100px); opacity: 0; }
     .fp-anim-in-warp-back { transform: scale(3) translateZ(100px); opacity: 0; }
 
