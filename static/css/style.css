@@ -808,23 +808,24 @@ section {
     }
 
     /* Outgoing Transitions (Applied to old slide) */
-    .fp-anim-out-up { transform: translateY(-100%); opacity: 0; }
-    .fp-anim-out-down { transform: translateY(100%); opacity: 0; }
-    .fp-anim-out-left { transform: translateX(-100%); opacity: 0; }
-    .fp-anim-out-right { transform: translateX(100%); opacity: 0; }
-    .fp-anim-out-zoom { transform: scale(1.2); opacity: 0; }
-
-    /* Unified 3D Warp Transitions */
+    /* Outgoing Transitions (Leaving the screen) */
+    .fp-anim-out-up { transform: translateY(-100vh) scale(1.5) translateZ(50px); opacity: 0; }
+    .fp-anim-out-down { transform: translateY(100vh) scale(0.5) translateZ(-50px); opacity: 0; }
+    .fp-anim-out-left { transform: translateX(-100vw) scale(1.5) translateZ(50px); opacity: 0; }
+    .fp-anim-out-right { transform: translateX(100vw) scale(0.5) translateZ(-50px); opacity: 0; }
+    .fp-anim-out-zoom { transform: scale(1.5) translateZ(50px); opacity: 0; }
+    
+    /* Unified 3D Warp Transitions (Straight forward/back) */
     .fp-anim-out-warp-forward { transform: scale(3) translateZ(100px); opacity: 0; }
     .fp-anim-out-warp-back { transform: scale(0.5) translateZ(-100px); opacity: 0; }
 
-    /* Initial state for incoming sections */
-    .fp-anim-in-up { transform: translateY(100%); }
-    .fp-anim-in-down { transform: translateY(-100%); }
-    .fp-anim-in-left { transform: translateX(100%); }
-    .fp-anim-in-right { transform: translateX(-100%); }
-    .fp-anim-in-zoom { transform: scale(0.8); }
-
+    /* Incoming Transitions (Initial state before entering screen) */
+    .fp-anim-in-up { transform: translateY(100vh) scale(0.5) translateZ(-50px); opacity: 0; }
+    .fp-anim-in-down { transform: translateY(-100vh) scale(1.5) translateZ(50px); opacity: 0; }
+    .fp-anim-in-left { transform: translateX(100vw) scale(0.5) translateZ(-50px); opacity: 0; }
+    .fp-anim-in-right { transform: translateX(-100vw) scale(1.5) translateZ(50px); opacity: 0; }
+    .fp-anim-in-zoom { transform: scale(0.5) translateZ(-50px); opacity: 0; }
+    
     /* Initial state for incoming warp sections */
     .fp-anim-in-warp-forward { transform: scale(0.5) translateZ(-100px); opacity: 0; }
     .fp-anim-in-warp-back { transform: scale(3) translateZ(100px); opacity: 0; }

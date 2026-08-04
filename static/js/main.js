@@ -334,13 +334,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Unified 3D Warp Sequence for a continuous tunnel journey
-    const transitions = Array(sections.length).fill({ 
-        out: 'fp-anim-out-warp-forward', 
-        in: 'fp-anim-in-warp-forward', 
-        downOut: 'fp-anim-out-warp-back', 
-        downIn: 'fp-anim-in-warp-back' 
-    });
+    // Varied 3D Warp Sequence (directions combined with Z-depth so it feels connected)
+    const transitions = [
+        { out: 'fp-anim-out-warp-forward', in: 'fp-anim-in-up', downOut: 'fp-anim-out-down', downIn: 'fp-anim-in-warp-back' }, // 1: Hero to About (Dive in)
+        { out: 'fp-anim-out-left', in: 'fp-anim-in-right', downOut: 'fp-anim-out-right', downIn: 'fp-anim-in-left' }, // 2: About to Education (Dodge left)
+        { out: 'fp-anim-out-up', in: 'fp-anim-in-up', downOut: 'fp-anim-out-down', downIn: 'fp-anim-in-down' }, // 3: Education to Experience (Fly up)
+        { out: 'fp-anim-out-zoom', in: 'fp-anim-in-warp-forward', downOut: 'fp-anim-out-warp-back', downIn: 'fp-anim-in-zoom' }, // 4: Experience to Projects (Warp)
+        { out: 'fp-anim-out-warp-forward', in: 'fp-anim-in-warp-forward', downOut: 'fp-anim-out-warp-back', downIn: 'fp-anim-in-warp-back' }, // 5: Projects to Contact (Straight Warp)
+    ];
     
     window.addEventListener('wheel', (e) => {
         
