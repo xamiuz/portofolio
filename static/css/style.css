@@ -653,13 +653,6 @@ h1, h2, h3, h4, .logo {
     transform: scale(2.5) rotateZ(15deg); /* Barrel roll jump effect */
 }
 
-.tunnel-container.warp-active ~ .tunnel-center-light {
-    background: radial-gradient(ellipse at center, var(--accent) 0%, transparent 80%);
-    opacity: 0.5;
-    transform: scale(1.5);
-    transition: all 0.3s ease-out;
-}
-
 .tunnel-wall {
     position: absolute;
     background-image: 
