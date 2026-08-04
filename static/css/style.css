@@ -619,13 +619,12 @@ h1, h2, h3, h4, .logo {
 
 /* 3D Perspective Tunnel */
 .tunnel-container {
-    perspective: 500px;
-    width: 100vw;
-    height: 100vh;
+    width: 120vw;
+    height: 120vh;
     position: absolute;
-    inset: 0;
-    overflow: hidden;
-    transform-style: preserve-3d;
+    top: 0;
+    left: 0;
+    overflow: visible;
     transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1);
     transform: scale(1);
     z-index: -1;
@@ -651,14 +650,14 @@ h1, h2, h3, h4, .logo {
 }
 
 .wall-full {
-    width: 100vw;
-    height: 100vh;
+    width: 120vw;
+    height: 120vh;
     left: 0;
     top: 0;
     animation: tunnelMove 10s linear infinite;
     opacity: 1;
-    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+    mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 30%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 30%, transparent 100%);
 }
 
 @keyframes tunnelMove {
