@@ -319,7 +319,7 @@ h1, h2, h3, h4, .logo {
     background-image:
         linear-gradient(var(--grid-line) 1px, transparent 1px),
         linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-    background-size: 80px 80px;
+    background-size: 150px 150px;
     mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
     -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
     pointer-events: none;
@@ -665,7 +665,7 @@ h1, h2, h3, h4, .logo {
     background-image: 
         linear-gradient(var(--grid-line) var(--grid-line-width, 2px), transparent var(--grid-line-width, 2px)),
         linear-gradient(90deg, var(--grid-line) var(--grid-line-width, 2px), transparent var(--grid-line-width, 2px));
-    background-size: 80px 80px;
+    background-size: 150px 150px;
     opacity: 1;
     transform: translateZ(0); /* Hardware acceleration */
 }
@@ -696,7 +696,7 @@ h1, h2, h3, h4, .logo {
 
 @keyframes tunnelMove {
     0% { background-position: 0 0; }
-    100% { background-position: 0 80px; }
+    100% { background-position: 0 150px; }
 }
 
 /* --- Mobile Performance Optimizations --- */
