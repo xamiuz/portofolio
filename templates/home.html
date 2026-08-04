@@ -178,20 +178,67 @@
 
     <!-- Tampilan PDF Portofolio Sementara -->
     <div class="pdf-container reveal zoom" style="width: 100%; max-width: 1000px; margin: 0 auto; height: 80vh; min-height: 600px; border-radius: var(--radius); overflow: hidden; box-shadow: var(--glass-shadow); border: 1px solid var(--glass-border); display: flex; flex-direction: column; background: var(--bg-surface);">
-        <iframe id="pdf-preview" src="{% static 'docs/Portofolio_Pandu_Wirayuda.pdf' %}#toolbar=0&navpanes=0&scrollbar=0" width="100%" style="flex-grow: 1; border: none;">
+        <iframe id="pdf-native" src="{% static 'docs/Portofolio_Pandu_Wirayuda.pdf' %}#toolbar=0&navpanes=0&scrollbar=0" width="100%" style="flex-grow: 1; border: none; display: none;">
             <p>Browser Anda tidak mendukung pratinjau PDF.</p>
         </iframe>
+        
+        <div id="pdf-mobile-viewer" class="scrollable-internal" style="flex-grow: 1; display: none; background: var(--bg-surface); overflow-y: auto; text-align: center; padding: 1rem;">
+            <div id="pdf-loading-text" style="color: var(--text-muted); margin-top: 2rem;">
+                <div class="spinner" style="width: 30px; height: 30px; border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid var(--accent); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem;"></div>
+                Memuat pratinjau PDF...
+            </div>
+        </div>
+
         <div style="padding: 1rem; text-align: center; border-top: 1px solid var(--glass-border);">
             <a href="{% static 'docs/Portofolio_Pandu_Wirayuda.pdf' %}" target="_blank" class="btn-outline-accent" style="font-size: 0.85rem; padding: 0.5rem 1.5rem;">Buka PDF Secara Penuh (Tab Baru)</a>
         </div>
+        
+        <!-- PDF.js Library for Mobile Rendering -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+        <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
         <script>
             document.addEventListener("DOMContentLoaded", function() {
-                if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-                    var iframe = document.getElementById("pdf-preview");
-                    var pdfPath = "{% static 'docs/Portofolio_Pandu_Wirayuda.pdf' %}";
-                    // Google Docs Viewer requires absolute public URL
-                    var pdfUrl = window.location.origin + pdfPath;
-                    iframe.src = "https://docs.google.com/viewer?url=" + encodeURIComponent(pdfUrl) + "&embedded=true";
+                var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                var nativeIframe = document.getElementById("pdf-native");
+                var mobileViewer = document.getElementById("pdf-mobile-viewer");
+                
+                if (isMobile) {
+                    mobileViewer.style.display = "block";
+                    
+                    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+                    var pdfUrl = "{% static 'docs/Portofolio_Pandu_Wirayuda.pdf' %}";
+                    var loadingTask = pdfjsLib.getDocument(pdfUrl);
+                    
+                    loadingTask.promise.then(async function(pdf) {
+                        document.getElementById("pdf-loading-text").style.display = "none";
+                        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                            const page = await pdf.getPage(pageNum);
+                            var scale = window.innerWidth < 600 ? 1.0 : 1.3;
+                            var viewport = page.getViewport({scale: scale});
+                            
+                            var canvas = document.createElement("canvas");
+                            var ctx = canvas.getContext("2d");
+                            canvas.height = viewport.height;
+                            canvas.width = viewport.width;
+                            canvas.style.maxWidth = "100%";
+                            canvas.style.height = "auto";
+                            canvas.style.marginBottom = "1rem";
+                            canvas.style.boxShadow = "var(--glass-shadow)";
+                            canvas.style.borderRadius = "8px";
+                            
+                            mobileViewer.appendChild(canvas);
+                            
+                            var renderContext = {
+                                canvasContext: ctx,
+                                viewport: viewport
+                            };
+                            await page.render(renderContext).promise;
+                        }
+                    }).catch(function(reason) {
+                        document.getElementById("pdf-loading-text").innerHTML = "Gagal memuat pratinjau PDF.<br><br>Silakan klik tombol di bawah untuk membukanya secara langsung.";
+                    });
+                } else {
+                    nativeIframe.style.display = "block";
                 }
             });
         </script>
