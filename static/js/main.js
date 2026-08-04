@@ -348,10 +348,27 @@ document.addEventListener("DOMContentLoaded", () => {
         const lightbox = document.getElementById('lightbox');
         if (lightbox && lightbox.style.display === 'flex') return;
 
+        const hScrollable = e.target.closest('.horizontal-scrollable');
+        if (hScrollable) {
+            const isAtLeft = hScrollable.scrollLeft <= 0;
+            const isAtRight = Math.ceil(hScrollable.scrollWidth - hScrollable.clientWidth - hScrollable.scrollLeft) <= 2;
+            
+            if (e.deltaY > 0 && !isAtRight) {
+                hScrollable.scrollLeft += e.deltaY;
+                e.preventDefault();
+                return;
+            }
+            if (e.deltaY < 0 && !isAtLeft) {
+                hScrollable.scrollLeft += e.deltaY;
+                e.preventDefault();
+                return;
+            }
+        }
+
         const scrollableDiv = e.target.closest('.scrollable-internal');
         if (scrollableDiv) {
-            const isAtTop = scrollableDiv.scrollTop === 0;
-            const isAtBottom = Math.abs(scrollableDiv.scrollHeight - scrollableDiv.clientHeight - scrollableDiv.scrollTop) <= 2;
+            const isAtTop = scrollableDiv.scrollTop <= 0;
+            const isAtBottom = Math.ceil(scrollableDiv.scrollHeight - scrollableDiv.clientHeight - scrollableDiv.scrollTop) <= 2;
             
             if (e.deltaY > 0 && !isAtBottom) return;
             if (e.deltaY < 0 && !isAtTop) return;

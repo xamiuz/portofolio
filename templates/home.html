@@ -137,34 +137,26 @@
     <div class="section-header">
         <h2 class="cinematic-section-title reveal">PENGHARGAAN & <span class="accent">PRESTASI</span></h2>
     </div>
-    <div class="masonry-grid">
+    <div class="horizontal-carousel horizontal-scrollable reveal zoom delay-1">
         {% if awards %}
             {% for award in awards %}
-            <div class="masonry-item glass-dark hover-zoom reveal zoom" onclick="openLightbox(this)" data-title="{{ award.title }}" data-desc="{{ award.description }}" data-tags="{% if award.date %}{{ award.date }}{% endif %}" data-media='[{% if award.image %}{"url": "{{ award.image.url }}", "type": "image"}{% endif %}]' style="cursor: pointer;">
+            <div class="carousel-item glass-dark hover-zoom" onclick="openLightbox(this)" data-title="{{ award.title }}" data-desc="{{ award.description }}" data-tags="{% if award.date %}{{ award.date }}{% endif %}" data-media='[{% if award.image %}{"url": "{{ award.image.url }}", "type": "image"}{% endif %}]'>
                 {% if award.image %}
-                    <img src="{{ award.image.url }}" alt="{{ award.title }}" class="project-img" style="object-fit: contain; background: #111;">
+                    <img src="{{ award.image.url }}" alt="{{ award.title }}">
                 {% else %}
-                    <div class="project-img-placeholder"></div>
+                    <div class="project-img-placeholder" style="width: 100%; height: 100%; background: var(--glass-bg);"></div>
                 {% endif %}
-                <div class="project-overlay">
-                    <h3 class="project-title">{{ award.title }}</h3>
+                <div class="carousel-overlay">
+                    <h3 class="carousel-title">{{ award.title }}</h3>
                     {% if award.description %}
-                        <p class="project-desc">{{ award.description|linebreaksbr }}</p>
-                    {% endif %}
-                    {% if award.date %}
-                        <div class="project-tags">
-                            <span class="badge">{{ award.date }}</span>
-                        </div>
+                        <p class="carousel-desc">{{ award.description|truncatechars:100 }}</p>
                     {% endif %}
                 </div>
             </div>
             {% endfor %}
         {% else %}
-            <div class="masonry-item glass-dark reveal zoom">
-                <div class="project-overlay" style="opacity: 1;">
-                    <h3 class="project-title">Belum ada data</h3>
-                    <p class="project-desc">Penghargaan belum ditambahkan.</p>
-                </div>
+            <div class="carousel-item glass-dark" style="display: flex; align-items: center; justify-content: center; text-align: center; padding: 2rem;">
+                <p style="color: var(--text-muted);">Belum ada penghargaan yang ditambahkan.</p>
             </div>
         {% endif %}
     </div>
