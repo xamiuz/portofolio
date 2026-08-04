@@ -31,7 +31,7 @@
     --hero-outline-filter: drop-shadow(0 0 12px rgba(229, 9, 20, 0.4));
     --orb-2: rgba(100, 60, 200, 0.15);
     --orb-3: rgba(245, 200, 66, 0.1);
-    --grid-line: rgba(255, 255, 255, 0.03);
+    --grid-line: rgba(255, 255, 255, 0.07);
     --radius: 14px;
     --transition-base: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -66,7 +66,7 @@ html[data-theme="light"] {
     --hero-outline-filter: drop-shadow(0 0 4px rgba(229, 9, 20, 0.15));
     --orb-2: rgba(100, 60, 200, 0.03);
     --orb-3: rgba(245, 200, 66, 0.02);
-    --grid-line: rgba(0, 0, 0, 0.02);
+    --grid-line: rgba(0, 0, 0, 0.06);
 }
 
 /* ============================================
@@ -644,9 +644,9 @@ h1, h2, h3, h4, .logo {
         linear-gradient(var(--grid-line) 1px, transparent 1px),
         linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
     background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 100% 100% at 50% 0%, black 10%, transparent 80%);
-    opacity: 0.8;
-    animation: panGrid 30s linear infinite;
+    mask-image: radial-gradient(ellipse 150% 150% at 50% 50%, black 10%, transparent 80%);
+    opacity: 1;
+    animation: panGrid 40s linear infinite;
 }
 
 @keyframes panGrid {
