@@ -48,7 +48,7 @@
     <!-- === Deskripsi & CTA === -->
     <div style="position: relative; z-index: 10; text-align: center; padding: 0 5% 5rem; max-width: 700px; margin-top: -1rem;">
         <p class="description cinematic-description reveal zoom delay-4" style="margin: 0 0 1.5rem; font-size: 1rem;">
-            Software Engineer &amp; IT Support. Berfokus pada pengembangan web, integrasi Kecerdasan Buatan (AI), dan UI/UX untuk menciptakan solusi digital berskala besar.
+            Software Engineer &amp; IT Support. Berfokus pada pengembangan web, integrasi Kecerdasan Buatan (AI), dan UI/UX untuk menghadirkan solusi digital yang inovatif dan berdampak.
         </p>
         <div class="cta-group reveal up delay-5" style="justify-content: center;">
             <a href="#about" class="btn-primary-bold">Eksplorasi Profil</a>
@@ -65,7 +65,7 @@
             {% if profile.about_text %}
                 {{ profile.about_text|linebreaksbr }}
             {% else %}
-                Saya menggabungkan teknik informatika dengan desain UX/UI yang tajam untuk menciptakan karya yang tidak hanya berfungsi secara sempurna, namun juga mampu membuat pengguna berdecak kagum.
+                Saya menggabungkan keahlian teknik informatika dengan desain UI/UX yang tajam untuk menciptakan solusi digital yang tidak hanya berfungsi sempurna, namun juga menghadirkan pengalaman pengguna yang luar biasa.
             {% endif %}
         </p>
         <div class="cta-group reveal delay-2" style="justify-content: center;">
@@ -92,13 +92,12 @@
                 <div class="timeline-content glass-dark">
                     <span class="timeline-date">{{ edu.start_year }} - {% if edu.end_year %}{{ edu.end_year }}{% else %}Sekarang{% endif %}</span>
                     <h3 class="timeline-title">{{ edu.degree }}</h3>
+                    <h4 class="timeline-company">{{ edu.institution }}</h4>
                     {% if edu.description %}
-                        <h4 class="timeline-company">{{ edu.institution }}</h4>
-                        <div class="timeline-desc-inner" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--glass-border);">
+                        <div class="timeline-desc-collapsible">
                             <p class="timeline-desc">{{ edu.description|linebreaksbr }}</p>
                         </div>
-                    {% else %}
-                        <h4 class="timeline-company">{{ edu.institution }}</h4>
+                        <button class="timeline-toggle-btn" onclick="this.previousElementSibling.classList.toggle('expanded'); this.textContent = this.previousElementSibling.classList.contains('expanded') ? 'Sembunyikan ▲' : 'Selengkapnya ▼';">Selengkapnya ▼</button>
                     {% endif %}
                 </div>
             </div>
@@ -123,7 +122,10 @@
                     <span class="timeline-date">{{ exp.start_date }} - {{ exp.end_date }}</span>
                     <h3 class="timeline-title">{{ exp.title }}</h3>
                     <h4 class="timeline-company">{{ exp.company }}</h4>
-                    <p class="timeline-desc">{{ exp.description|linebreaksbr }}</p>
+                    <div class="timeline-desc-collapsible">
+                        <p class="timeline-desc">{{ exp.description|linebreaksbr }}</p>
+                    </div>
+                    <button class="timeline-toggle-btn" onclick="this.previousElementSibling.classList.toggle('expanded'); this.textContent = this.previousElementSibling.classList.contains('expanded') ? 'Sembunyikan ▲' : 'Selengkapnya ▼';">Selengkapnya ▼</button>
                 </div>
             </div>
             {% endfor %}
