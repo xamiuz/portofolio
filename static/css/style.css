@@ -737,8 +737,27 @@ h1, h2, h3, h4, .logo {
         -webkit-backdrop-filter: none !important;
         background: rgba(10, 10, 15, 0.98) !important; /* Solid fallback */
     }
-    .hero-title-animate {
-        animation: heroTextRevealMobile 0.8s ease-out forwards !important;
+    /* FORCE NATIVE SMOOTH SCROLLING FOR MOBILE */
+    body {
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        height: auto !important;
+    }
+    #fp-wrapper {
+        height: auto !important;
+        overflow: visible !important;
+    }
+    section, footer {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 80vh !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        padding: 4rem 5% !important;
     }
 }
 

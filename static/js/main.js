@@ -301,6 +301,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     function initFullPageScroll() {
+        if (window.innerWidth <= 768) {
+            document.body.classList.remove('fp-enabled');
+            sections.forEach(sec => {
+                sec.className = sec.className.replace(/fp-anim-[a-z-]+/g, '').trim();
+                sec.classList.remove('fp-active');
+                sec.style.transform = '';
+                sec.style.opacity = '';
+                sec.style.visibility = '';
+            });
+            return;
+        }
+
         document.body.classList.add('fp-enabled');
         sections.forEach((sec, idx) => {
             sec.className = sec.className.replace(/fp-anim-[a-z-]+/g, '').trim();
@@ -314,6 +326,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initFullPageScroll();
     window.addEventListener('resize', initFullPageScroll);
+
+    window.addEventListener('scroll', () => {
+        if (window.innerWidth <= 768) {
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (totalHeight > 0) {
+                const percent = (window.scrollY / totalHeight) * 100;
+                setProgress(percent);
+            }
+        }
+    }, { passive: true });
 
     function updateProgress() {
         const percent = (currentSectionIndex / (sections.length - 1)) * 100;
@@ -344,6 +366,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
     
     window.addEventListener('wheel', (e) => {
+        if (window.innerWidth <= 768) return; // Allow native scroll on mobile
         
         const lightbox = document.getElementById('lightbox');
         if (lightbox && lightbox.style.display === 'flex') return;
@@ -404,6 +427,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { passive: false }); // false if we ever needed preventDefault, but we do passive logic
 
     function handleSwipe(e) {
+        if (window.innerWidth <= 768) return; // Bypassed for native smooth scrolling on mobile
         if (isScrolling) return;
         
         const lightbox = document.getElementById('lightbox');
