@@ -665,24 +665,26 @@ h1, h2, h3, h4, .logo {
 
 .wall-top, .wall-bottom {
     width: 200vw;
-    height: 150vh;
+    height: 300vh; /* Deep perspective */
     left: -50vw;
     animation: tunnelMove 4s linear infinite;
     opacity: 1;
 }
 
 .wall-top {
-    top: -100vh;
-    transform: rotateX(-80deg) translateZ(40vh);
-    mask-image: linear-gradient(to bottom, transparent 10%, black 100%);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 10%, black 100%);
+    bottom: 50vh; /* Rests exactly on the horizon */
+    transform-origin: bottom center;
+    transform: rotateX(-80deg);
+    mask-image: linear-gradient(to top, transparent 0%, black 80%);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 80%);
 }
 
 .wall-bottom {
-    top: 50vh;
-    transform: rotateX(80deg) translateZ(40vh);
-    mask-image: linear-gradient(to top, transparent 10%, black 100%);
-    -webkit-mask-image: linear-gradient(to top, transparent 10%, black 100%);
+    top: 50vh; /* Rests exactly on the horizon */
+    transform-origin: top center;
+    transform: rotateX(80deg);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 80%);
 }
 
 @keyframes tunnelMove {
